@@ -1,0 +1,31 @@
+{
+  "name": "bedes-manager",
+  "version": "1.0.0",
+  "description": "A project to ease the management of the management of terms in the Building Energy Data Exchange Standard dictionary.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maalka/BEDES-Manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maalka/BEDES-Manager/issues"
+  },
+  "homepage": "https://github.com/Maalka/BEDES-Manager#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "connect-mongo": "^2.0.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "mongoose": "^4.10.8",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7"
+  }
+}

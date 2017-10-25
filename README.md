@@ -17,6 +17,7 @@ You'll need to install:
 
 ```bash
 npm install
+npm start
 ```
 
 ## Running the tests
