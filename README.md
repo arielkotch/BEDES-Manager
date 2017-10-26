@@ -37,9 +37,7 @@ npm start
 
 ## Authors
 
-*
-
-See also the list of [contributors](https://github.com/Maalka/BEDES-Manager/contributors) who participated in this project.
+See the list of [contributors](https://github.com/Maalka/BEDES-Manager/contributors) who participated in this project.
 
 ## License
 
