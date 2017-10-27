@@ -1,4 +1,3 @@
-'use strict';
 // Modules
 const dotenv = require('dotenv').config();
 const express = require('express');
@@ -39,7 +38,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, '/public'), { redirect: false }));
 
 // Express Config
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static Pages
 app.get('/', staticController.getHome);

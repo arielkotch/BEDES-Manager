@@ -1,5 +1,3 @@
-'use strict';
-
 exports.getHome = (req, res) => {
-    res.send('HI TED');
+  res.send('HI TED');
 };
