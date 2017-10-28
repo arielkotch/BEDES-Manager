@@ -3,17 +3,15 @@ const mongoose = require('mongoose');
 
 // Define the schema for our model
 const termSchema = mongoose.Schema({
-  Content-UUID: String,
+  'Content-UUID': String,
   URL: String,
   Term: String,
-  Updated-date: Date,
+  'Updated-date': Date,
   Category: String,
-  Term-Definition: {
-    p: String
-  },
+  'Term-Definition':  String,
   Application: String,
   Sector: String,
-  Unit-of-Measure: String
+  'Unit-of-Measure': String
 });
 
 // Create the model and expose it to our app
