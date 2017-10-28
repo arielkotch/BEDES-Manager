@@ -1,17 +1,32 @@
 // Bedes ? Schema here
 const mongoose = require('mongoose');
 
+// Define child options schema
+const optionSchema = mongoose.Schema({
+  'Content-UUID': String,
+  'URL': String,
+  'Term': String,
+  'Updated-date': Date,
+  'Related-Term': String,
+  'Related-Term-UUID': String,
+  'Option-Definition': String,
+  'Application': String,
+  'Sector': String,
+  'Unit-of-Measure': String
+});
+
 // Define the schema for our model
 const termSchema = mongoose.Schema({
   'Content-UUID': String,
-  URL: String,
-  Term: String,
+  'URL': String,
+  'Term': String,
   'Updated-date': Date,
-  Category: String,
+  'Category': String,
   'Term-Definition':  String,
-  Application: String,
-  Sector: String,
-  'Unit-of-Measure': String
+  'Application': String,
+  'Sector': String,
+  'Unit-of-Measure': String,
+  'Options': [optionSchema]
 });
 
 // Create the model and expose it to our app
