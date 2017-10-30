@@ -6,7 +6,7 @@ const path = require('path');
 const Term = require('../models/term');
 
 const initalXmlImport = (app) => {
-  app.get('/initial-import', function(req, res) {
+  app.get('/api/initial-import', function(req, res) {
     // Check if Term collection has any documents
     Term.count({}, (err, count) => {
       console.log(count);

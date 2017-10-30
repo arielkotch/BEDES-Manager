@@ -1,4 +1,4 @@
-const home = (app, isLoggedIn) => {
+const home = (app) => {
   app.get('/', function(req, res) {
     res.send('welcome');
   });
