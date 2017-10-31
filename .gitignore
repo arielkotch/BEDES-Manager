@@ -57,5 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# docker ignore
+.dockerignore
+
 # production build for client side
 client/build/
