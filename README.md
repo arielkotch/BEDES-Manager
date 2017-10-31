@@ -18,8 +18,6 @@ You'll need to install:
 ```bash
 npm run devbuild
 npm start
-# Open new terminal and cd into client directory
-npm start
 ```
 
 ## Running the tests
