@@ -33,7 +33,7 @@ npm start
 * [Node.js](https://nodejs.org/en/) - Javascript runtime for executing javascript code server-side
 * [Express.js](https://expressjs.com/) - Web application framework for Node.js
 * [MongoDB](https://www.mongodb.com/) - Document database (NOSQL)
-* [Handlebars.js](http://handlebarsjs.com/) - Dyanamic HTML-like Template
+* [React.js](https://reactjs.org/) - Javascript library for building user interfaces
 
 ## Authors
 
