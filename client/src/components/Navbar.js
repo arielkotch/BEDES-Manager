@@ -32,7 +32,7 @@ export default class Navbar extends Component {
       <div className="navbar-fixed">
         <nav>
           <div className="nav-wrapper container">
-            <a className="brand-logo">Flying Lanterns</a>
+            <a className="brand-logo">Bedes Manager</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li className={this.state.homeActive}>
                 <Link to='/' onClick={this.homeClicked}>Home</Link>
