@@ -16,7 +16,9 @@ You'll need to install:
 ### Installing
 
 ```bash
-npm install
+npm run devbuild
+npm start
+# Open new terminal and cd into client directory
 npm start
 ```
 
