@@ -27,6 +27,8 @@ const configureServer = (app) => {
 
   // Express Config
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  
 }
 
 module.exports = configureServer;

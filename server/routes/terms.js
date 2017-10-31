@@ -18,7 +18,7 @@ const viewTerms = (app) => {
       if (term) {
         res.send(term);
       } else {
-        res.send('Term not found.');
+        res.send(false);
       }
     })
   });

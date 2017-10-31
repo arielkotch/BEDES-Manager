@@ -1,11 +1,11 @@
 // Routes index
 
 const initalXmlImport = require('./initialXmlImport');
-const viewTerms = require('./viewTerms');
+const terms = require('./terms');
 
 const configureRoutes = (app) => {
   initalXmlImport(app);
-  viewTerms(app);
+  terms(app);
 };
 
 module.exports = configureRoutes;
