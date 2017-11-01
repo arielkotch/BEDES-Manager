@@ -6,7 +6,7 @@ const path = require('path');
 const Term = require('../models/term');
 
 const initalXmlImport = (app) => {
-  app.get('/api/initial-import', function(req, res) {
+  app.get('/api/initial-import', (req, res) => {
     // Check if Term collection has any documents
     Term.count({}, (err, count) => {
       console.log(count);
@@ -14,8 +14,8 @@ const initalXmlImport = (app) => {
         // Parser for converting xml to json
         const parser = new xml2js.Parser();
         // Parse terms xml and convert to json
-        fs.readFile(path.resolve(__dirname, '../../resources/bedes_online_dictionary_uuid-terms.xml'), function(err, data) {
-          parser.parseString(data, function (err, result) {
+        fs.readFile(path.resolve(__dirname, '../../resources/bedes_online_dictionary_uuid-terms.xml'), (err, data) => {
+          parser.parseString(data, (err, result) => {
             let termsList = result.nodes.node;
             // Save terms to DB
             termsList.forEach((term, index) => {
@@ -56,7 +56,7 @@ const initalXmlImport = (app) => {
               newTerm['Unit-of-Measure'] = term['Unit-of-Measure'][0];
 
               // Save the term
-              newTerm.save(function(err) {
+              newTerm.save((err) => {
                 if (err) {
                   throw err;
                 }
@@ -69,10 +69,8 @@ const initalXmlImport = (app) => {
         });
 
         // Parse options xml and convert to json
-        fs.readFile(path.resolve(__dirname, '../../resources/bedes_online_dictionary_uuid-lo.xml'), function(err, data) {
-          parser.parseString(data, function (err, result) {
-            // console.dir(result);
-            res.send(result.nodes.node[0]);
+        fs.readFile(path.resolve(__dirname, '../../resources/bedes_online_dictionary_uuid-lo.xml'), (err, data) => {
+          parser.parseString(data, (err, result) => {
             let OptionList = result.nodes.node;
             // Save terms to DB
             OptionList.forEach((option, index) => {
@@ -90,14 +88,14 @@ const initalXmlImport = (app) => {
               newOption['Unit-of-Measure'] = option['Unit-of-Measure'][0];
 
               // Find term associated with current option
-              Term.findOne({ 'Content-UUID': option['Related-Term-UUID'][0] }, function (err, term) {
+              Term.findOne({ 'Content-UUID': option['Related-Term-UUID'][0] }, (err, term) => {
                 if (err) {
                   return handleError(err);
                 }
                 // Save the updated term
                 if (term) {
                   term['Options'].push(newOption);
-                  term.save(function(err) {
+                  term.save((err) => {
                     if (err) {
                       throw err;
                     }
@@ -109,10 +107,12 @@ const initalXmlImport = (app) => {
             console.log('Done');
           });
         });
-
+        console.log('Initial XML import to MongoDB successful');
+        res.send('Initial XML import to MongoDB successful');
       } else {
-        // Term collectoin has documents so don't import xml into DB
-        console.log('Term collection already has documents inside...');
+        // Term collection has documents so don't import xml into DB
+        console.log('Term collection already has documents inside');
+        res.send('Term collection already has documents inside');
       }
     });
   });

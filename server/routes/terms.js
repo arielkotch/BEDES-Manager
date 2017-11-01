@@ -2,19 +2,40 @@
 const Term = require('../models/term');
 
 const viewTerms = (app) => {
-  app.get('/api/allterms', function(req, res) {
+  // Get all terms
+  app.get('/api/allterms', (req, res) => {
     Term.find({}, (err, terms) => {
       res.json(terms);
     });
   });
 
-  app.get('/api/term/:uuid', function(req, res) {
+  // Delete term
+  app.delete('/api/term/delete/:uuid', (req, res) => {
     const uuid = req.params.uuid;
-    Term.findOne({ 'Content-UUID': uuid }, function (err, term) {
+    Term.findOneAndRemove({ 'Content-UUID': uuid }, (err, term) => {
+      if (err) {
+        res.send(null, 500);
+      }
+      else {
+        // Check if term was found
+        if (term) {
+          res.send('Term with Conent-UUID: ' + uuid + ' successfully deleted');
+        } else {
+          res.send('Term not found. Nothing deleted.');
+        }
+
+      }
+    });
+  });
+
+  // Get one term by UUID
+  app.get('/api/term/:uuid', (req, res) => {
+    const uuid = req.params.uuid;
+    Term.findOne({ 'Content-UUID': uuid }, (err, term) => {
       if (err) {
         return handleError(err);
       }
-      // console.log(term);
+      console.log(term);
       if (term) {
         res.send(term);
       } else {
@@ -22,6 +43,8 @@ const viewTerms = (app) => {
       }
     })
   });
+
+
 
   return app;
 }
