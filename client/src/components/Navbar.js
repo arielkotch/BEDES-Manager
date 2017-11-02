@@ -6,7 +6,8 @@ export default class Navbar extends Component {
     super(props);
     this.state = {
       homeActive: 'active',
-      aboutActive: '',
+      searchActive: '',
+      updateActive: '',
     };
   }
 
@@ -16,14 +17,24 @@ export default class Navbar extends Component {
   homeClicked = () => {
     this.setState({
       homeActive: 'active',
-      aboutActive: '',
+      searchActive: '',
+      updateActive: '',
     });
   }
 
-  aboutClicked = () => {
+  searchClicked = () => {
     this.setState({
       homeActive: '',
-      aboutActive: 'active',
+      searchActive: 'active',
+      updateActive: '',
+    });
+  }
+
+  updateClicked = () => {
+    this.setState({
+      homeActive: '',
+      searchActive: '',
+      updateActive: 'active',
     });
   }
 
@@ -37,8 +48,11 @@ export default class Navbar extends Component {
               <li className={this.state.homeActive}>
                 <Link to='/' onClick={this.homeClicked}>Home</Link>
               </li>
-              <li className={this.state.aboutActive}>
-                <Link to='/about' onClick={this.aboutClicked}>About</Link>
+              <li className={this.state.searchActive}>
+                <Link to='/search' onClick={this.searchClicked}>Search</Link>
+              </li>
+              <li className={this.state.searchActive}>
+                <Link to='/update' onClick={this.updateClicked}>Update</Link>
               </li>
             </ul>
           </div>

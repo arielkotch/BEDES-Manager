@@ -19,6 +19,7 @@ You'll need to install:
 npm run devbuild
 npm start
 ```
+Go to http://127.0.0.1:5000/api/initial-import to do initial xml import into DB.
 
 ## Running the tests
 
