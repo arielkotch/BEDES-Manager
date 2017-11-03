@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import SearchTerm from './SearchTerm';
 import UpdateTerm from './UpdateTerm';
+import ExportToXml from './ExportToXml';
 
 const Main = () => (
   <main>
@@ -11,6 +12,7 @@ const Main = () => (
       <Route exact path='/' component={Home}/>
       <Route exact path='/search' component={SearchTerm}/>
       <Route exact path='/update' component={UpdateTerm}/>
+      <Route exact path='/export' component={ExportToXml}/>
     </Switch>
   </main>
 );

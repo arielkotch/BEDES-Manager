@@ -8,6 +8,7 @@ export default class Navbar extends Component {
       homeActive: 'active',
       searchActive: '',
       updateActive: '',
+      exportActive: '',
     };
   }
 
@@ -19,6 +20,7 @@ export default class Navbar extends Component {
       homeActive: 'active',
       searchActive: '',
       updateActive: '',
+      exportActive: '',
     });
   }
 
@@ -27,6 +29,7 @@ export default class Navbar extends Component {
       homeActive: '',
       searchActive: 'active',
       updateActive: '',
+      exportActive: '',
     });
   }
 
@@ -35,6 +38,16 @@ export default class Navbar extends Component {
       homeActive: '',
       searchActive: '',
       updateActive: 'active',
+      exportActive: '',
+    });
+  }
+
+  exportClicked = () => {
+    this.setState({
+      homeActive: '',
+      searchActive: '',
+      updateActive: '',
+      exportActive: 'active',
     });
   }
 
@@ -51,8 +64,11 @@ export default class Navbar extends Component {
               <li className={this.state.searchActive}>
                 <Link to='/search' onClick={this.searchClicked}>Search</Link>
               </li>
-              <li className={this.state.searchActive}>
+              <li className={this.state.updateActive}>
                 <Link to='/update' onClick={this.updateClicked}>Update</Link>
+              </li>
+              <li className={this.state.exportActive}>
+                <Link to='/export' onClick={this.exportClicked}>Export to XML</Link>
               </li>
             </ul>
           </div>

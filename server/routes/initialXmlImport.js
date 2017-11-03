@@ -16,6 +16,7 @@ const initalXmlImport = (app) => {
         // Parse terms xml and convert to json
         fs.readFile(path.resolve(__dirname, '../../resources/bedes_online_dictionary_uuid-terms.xml'), (err, data) => {
           parser.parseString(data, (err, result) => {
+            // console.log(result);
             let termsList = result.nodes.node;
             // Save terms to DB
             termsList.forEach((term, index) => {
