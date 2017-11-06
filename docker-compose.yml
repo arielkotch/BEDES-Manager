@@ -1,14 +1,14 @@
 version: "2"
 services:
-  web:
+  server:
     build: .
     ports:
       - "3000:3000"
+      - "5000:5000"
+    environment:
+        MONGODB_URI:
+        mongodb://localhost:27017/maalka_bedes
     links:
-      - mongo
-  mongo:
+      - mongodb
+  mongodb:
     image: mongo
-    volumes:
-      - /data/mongodb/db:/data/db
-    ports:
-      - "27017:27017"
