@@ -7,6 +7,7 @@ export default class Navbar extends Component {
     this.state = {
       homeActive: 'active',
       searchActive: '',
+      addActive: '',
       updateActive: '',
       exportActive: '',
     };
@@ -19,6 +20,7 @@ export default class Navbar extends Component {
     this.setState({
       homeActive: 'active',
       searchActive: '',
+      addActive: '',
       updateActive: '',
       exportActive: '',
     });
@@ -28,6 +30,17 @@ export default class Navbar extends Component {
     this.setState({
       homeActive: '',
       searchActive: 'active',
+      addActive: '',
+      updateActive: '',
+      exportActive: '',
+    });
+  }
+
+  addClicked = () => {
+    this.setState({
+      homeActive: '',
+      searchActive: '',
+      addActive: 'active',
       updateActive: '',
       exportActive: '',
     });
@@ -37,6 +50,7 @@ export default class Navbar extends Component {
     this.setState({
       homeActive: '',
       searchActive: '',
+      addActive: '',
       updateActive: 'active',
       exportActive: '',
     });
@@ -46,6 +60,7 @@ export default class Navbar extends Component {
     this.setState({
       homeActive: '',
       searchActive: '',
+      addActive: '',
       updateActive: '',
       exportActive: 'active',
     });
@@ -63,6 +78,9 @@ export default class Navbar extends Component {
               </li>
               <li className={this.state.searchActive}>
                 <Link to='/search' onClick={this.searchClicked}>Search</Link>
+              </li>
+              <li className={this.state.updateActive}>
+                <Link to='/add' onClick={this.addClicked}>Add</Link>
               </li>
               <li className={this.state.updateActive}>
                 <Link to='/update' onClick={this.updateClicked}>Update</Link>
