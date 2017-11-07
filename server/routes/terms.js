@@ -54,6 +54,8 @@ const viewTerms = (app) => {
 
   // Export terms to XML
   app.get('/api/export-terms', (req, res) => {
+    // Find all terms and exclude _id and __v
+    // lean() is used tell Mongoose to return a plan javascript version of returned doc
     Term.find({}, { '_id': 0, '__v': 0, 'Options': 0 }).lean().exec((err, terms) => {
       // Set 'node' xml tag for each object in terms array
       let obj = { node: terms };

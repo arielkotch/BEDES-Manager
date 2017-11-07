@@ -4,7 +4,7 @@
   "description": "A project to ease the management of the management of terms in the Building Energy Data Exchange Standard dictionary.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "npm run concurrent",
     "concurrent": "concurrently 'npm run server' 'cd client && npm start'",
     "server": "MONGODB_URI=mongodb://localhost:27017/maalka_bedes nodemon server/app.js",
@@ -41,6 +41,8 @@
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.1",
+    "sinon-mongoose": "^2.0.2"
   }
 }

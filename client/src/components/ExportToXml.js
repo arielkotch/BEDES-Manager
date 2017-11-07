@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ExportToXml extends Component {
+
+  exportTermButtonClick = () => {
+    axios.get('/api/export-terms')
+      .then(function (response) {
+        // console.log(response);
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   render() {
     return (
-      <div class="row">
-        <div class="col s12">
-          <div class="card-panel">
-            <div><a class="waves-effect waves-light btn">Terms XML</a></div>
-            <div><a class="waves-effect waves-light btn">Options XML</a></div>
+      <div className="row">
+        <div className="col s12">
+          <div className="card-panel">
+            <div><a className="waves-effect waves-light btn" onClick={this.exportTermButtonClick}>Terms XML</a></div>
           </div>
         </div>
       </div>
