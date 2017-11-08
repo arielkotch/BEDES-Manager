@@ -7,6 +7,7 @@ export default class ExportToXml extends Component {
         <div class="col s12">
           <div class="card-panel">
             <div><a class="waves-effect waves-light btn">Terms XML</a></div>
+            <br />
             <div><a class="waves-effect waves-light btn">Options XML</a></div>
           </div>
         </div>
