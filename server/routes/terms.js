@@ -17,6 +17,19 @@ const viewTerms = (app) => {
     });
   });
 
+  // Add term
+  app.post('/api/term/add', (req, res) => {
+      // add match to term model
+      var term = new Term(req.body);
+          term.save()
+        .then(term => {
+          console.log('Term added successfully.');
+        })
+        .catch(err => {
+          res.status(400).send('Failed to save to db.')
+        });
+    });
+
   // Delete term
   app.delete('/api/term/delete/:uuid', (req, res) => {
     const uuid = req.params.uuid;

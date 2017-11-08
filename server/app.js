@@ -1,6 +1,7 @@
 // This file is entry point and bootstraps express application
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const configureServer = require('./server');
 const configureRoutes = require('./routes');
@@ -10,6 +11,10 @@ const app = express();
 
 configureServer(app);
 configureRoutes(app);
+
+// Middleware to post data to server
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {

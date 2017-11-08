@@ -119,7 +119,6 @@ export default class SearchTerm extends Component {
                       <div>Application: {this.state.term['Application']}</div>
                       <div>Sector: {this.state.term['Sector']}</div>
                       <div>Unit-of-Measure: {this.state.term['Unit-of-Measure']}</div>
-                      <div>URL: {this.state.term['URL']}</div>
                       <div>Options: {this.state.optionList}</div>
                       <a className="waves-effect waves-light btn" onClick={this.handleDeleteButtonClick}>Delete Term</a>
                     </div>
