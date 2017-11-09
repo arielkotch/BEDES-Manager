@@ -20,8 +20,18 @@ const viewTerms = (app) => {
   // Add term
   app.post('/api/term/add', (req, res) => {
       // add match to term model
-      var term = new Term(req.body);
-          term.save()
+      var term = new Term({
+          'Content-UUID': req.body.uuid,
+          'URL': req.body.url,
+          'Term': req.body.term,
+          'Updated-date': req.body.date,
+          'Category': req.body.category,
+          'Term-Definition': req.body.definition,
+          'Application': req.body.application,
+          'Sector': req.body.sector,
+          'Unit-of-Measure': req.body.measure,
+      });
+        term.save()
         .then(term => {
           console.log('Term added successfully.');
         })
