@@ -4,7 +4,7 @@ import {
   Container
 } from 'semantic-ui-react';
 
-export default class Home extends Component {
+export default class Option extends Component {
   constructor(props) {
     super(props);
 

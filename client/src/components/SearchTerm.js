@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {
+  Container,
+  Button,
+  Form
+} from 'semantic-ui-react';
 
 export default class SearchTerm extends Component {
   constructor(props) {
@@ -87,63 +92,17 @@ export default class SearchTerm extends Component {
 
   render() {
     return (
-      <div>
-        <div class="row">
-          <form className="col s12" onSubmit={this.handleUuidSearchSubmit}>
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="seach_term" type="text" className="validate" onChange={this.handleUuidSearchChange} />
-                <label htmlFor="search_term">Enter UUID to search</label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="row">
-          {
-            this.state.termNotFound
-            ?
-              <div className="red-text">Term not found</div>
-            :
-              null
-          }
-          {
-            this.state.termDeleted
-            ?
-              <div className="red-text">Term deleted</div>
-            :
-              null
-          }
-          <div className="col s12">
-            <div className="card-panel">
-              <div>Content-UUID: {this.state.term['Content-UUID']}</div>
-              <div>URL: {this.state.term['URL']}</div>
-              <div>Term: {this.state.term['Term']}</div>
-              <div>Updated-date: {this.state.term['Updated-date']}</div>
-              <div>Category: {this.state.term['Category']}</div>
-              <div>Term-Definition: {this.state.term['Term-Definition']}</div>
-              <div>Application: {this.state.term['Application']}</div>
-              <div>Sector: {this.state.term['Sector']}</div>
-              <div>Unit-of-Measure: {this.state.term['Unit-of-Measure']}</div>
-              <div>URL: {this.state.term['URL']}</div>
-              <div>Options: {this.state.optionList}</div>
-              <a className="waves-effect waves-light btn" onClick={this.handleDeleteButtonClick}>Delete Term</a>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <form className="col s12" onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="search_keyword" type="text" className="validate" onChange={this.handleChange} />
-                <label htmlFor="search_keyword">Enter keyword</label>
-              </div>
-            </div>
-            <div className="row">
-              
-            </div>
-          </form>
-        </div>
-      </div>
+      <Container>
+        <Form onSubmit={this.handleUuidSearchSubmit}>
+          <Form.Field>
+            <label>Search for term</label>
+            <input placeholder='Search for term' onChange={this.handleUuidSearchChange} />
+          </Form.Field>
+          <Button type='submit'>Search</Button>
+        </Form>
+
+
+      </Container>
     );
   }
 }

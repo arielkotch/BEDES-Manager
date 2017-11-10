@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  Container
+} from 'semantic-ui-react';
 
 export default class AddTerm extends Component {
   constructor(props) {
@@ -9,9 +12,9 @@ export default class AddTerm extends Component {
   }
   render() {
     return (
-      <div>
-        Add Term
-      </div>
+      <Container>
+        <p>Add term</p>
+      </Container>
     );
   }
 }
