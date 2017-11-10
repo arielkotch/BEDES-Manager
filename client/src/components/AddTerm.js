@@ -19,15 +19,14 @@ export default class AddTerm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e, _state) {
+  handleChange(e) {
       this.setState({
-          [_state]: e.target.value
+          [e.target.name]: e.target.value
       });
   };
 
   handleSubmit(e) {
-      e.preventDefault();
-      axios.post('http://localhost:5000/api/term/add/', {
+      axios.post('http://localhost:5000/api/term/add', {
         'Content-UUID': this.state.uuid,
         'URL': this.state.url,
         'Term': this.state._term,
@@ -38,12 +37,11 @@ export default class AddTerm extends Component {
         'Sector': this.state.sector,
         'Unit-of-Measure': this.state.measure
       })
-      .then(res =>
-          console.log(res)
-      )
+      .then(function(response){
+          console.log(response)
+      })
       .catch(err =>
           console.log(err))
-
       this.props.history.push('/');
   }
 
@@ -58,15 +56,15 @@ export default class AddTerm extends Component {
                 <div className="row">
                   <div className="col s12">
                         <form className="col s12" onSubmit={this.handleSubmit}>
-                          <input type="text" placeholder="Content-UUID" name="uuid" value={this.state.uuid} onChange={(e) => this.handleChange(e, 'uuid') }/>
-                          <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={(e) => this.handleChange(e, 'url') }/>
-                          <input type="text" placeholder="Term" name="_term" value={this.state._term} onChange={(e) => this.handleChange(e, '_term') }/>
-                          <input type="text" placeholder="Updated-date" name="date" value={this.state.date} onChange={(e) => this.handleChange(e, 'date') }/>
-                          <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={(e) => this.handleChange(e, 'category') }/>
-                          <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={(e) => this.handleChange(e, 'definition') }/>
-                          <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={(e) => this.handleChange(e, 'application') }/>
-                          <input type="text" placeholder="Sector" name="sector" value={this.state.sector} onChange={(e) => this.handleChange(e, 'sector') }/>
-                          <input type="text" placeholder="Unit-of-Measure" name="measure" value={this.state.measure} onChange={(e) => this.handleChange(e, 'measure') }/>
+                          <input type="text" placeholder="Content-UUID" name="uuid"   value={this.state.uuid} onChange={this.handleChange}/>
+                          <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange}/>
+                          <input type="text" placeholder="Term" name="_term" value={this.state._term} onChange={this.handleChange}/>
+                          <input type="text" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
+                          <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
+                          <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={this.handleChange}/>
+                          <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={this.handleChange}/>
+                          <input type="text" placeholder="Sector" name="sector" value={this.state.sector} onChange={this.handleChange}/>
+                          <input type="text" placeholder="Unit-of-Measure" name="measure" value={this.state.measure} onChange={this.handleChange}/>
                           <input type="submit" value="Submit" className="waves-effect waves-light btn"/>
                         </form>
                       </div>

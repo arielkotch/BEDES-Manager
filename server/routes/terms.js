@@ -42,7 +42,7 @@ const viewTerms = (app) => {
       });
         term.save()
         .then(term => {
-          console.log('Term added successfully.');
+          console.log('Term with Content-UUID: ' + uuid + ' added successfully.');
         })
         .catch(err => {
           res.status(400).send('Failed to save to db.')
