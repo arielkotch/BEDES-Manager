@@ -36,6 +36,45 @@ const viewTerms = (app) => {
     });
   });
 
+  // Search terms by keyword match with Term, Term-Definition or with Content-UUID
+  app.get('/api/term/search/:query', (req, res) => {
+    const query = req.params.query;
+    const queryRe = new RegExp(query);
+    // regexObj for uuid
+    const uuidRe = new RegExp('^\\w{8}-\\w{4}-\\w{4}-\\w{12}$');
+    console.log(uuidRe);
+    // check if query is a Content-UUID
+    // eg: b3982f93-0868-4959-a6aa-bca5f6956947
+    if (uuidRe.test(query)) {
+      console.log("uuid...");
+      Term.findOne({ 'Content-UUID': uuid }, (err, term) => {
+        if (err) {
+          return handleError(err);
+        }
+        console.log(term);
+        if (term) {
+          res.send(term);
+        } else {
+          res.send(false);
+        }
+      })
+    } else {
+      console.log("keyword...");
+      Term.find({ 'Term': { $regex: queryRe, $options: 'i' } }, (err, terms) => {
+        if (err) {
+          return handleError(err);
+        }
+        else if (terms.length > 0) {
+        // Check that terms exists
+          res.send(terms);
+        } else {
+        // Sent message if no terms were found
+          res.send('No matching term found');
+        }
+      });
+    }
+  });
+
   // Search terms by keyword match
   app.get('/api/term/keyword/:keyword', (req, res) => {
     const keyword = req.params.keyword;

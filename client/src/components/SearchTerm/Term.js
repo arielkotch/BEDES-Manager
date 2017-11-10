@@ -55,7 +55,7 @@ export default class Term extends Component {
         <Segment>Term-Definition: {this.props.termData['Term-Definition']}</Segment>
         <Segment>Application: {this.props.termData['Application']}</Segment>
         <Segment>Sector: {this.props.termData['Sector']}</Segment>
-        <Segment>Unit-of-Measure: {this.props.termData['Unit-of-Measure']}</Segment>
+        <Segment>Unit-of-Measure: {this.props.termData['Unit-of-MeasureThe']}</Segment>
         <Segment>URL: {this.props.termData['URL']}</Segment>
         <Segment>Options:
           {this.state.optionList}
