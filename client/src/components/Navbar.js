@@ -17,6 +17,7 @@ import {
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
+    // initial active values of menu buttons
     this.state = {
       homeActive: true,
       searchActive: false,
@@ -26,6 +27,8 @@ export default class Navbar extends Component {
     };
   }
 
+  // when home button is clicked, set homeActive to true and everything else to false.
+  // this is for setting the active property of the menu buttons
   homeClicked = () => {
     this.setState({
       homeActive: true,
