@@ -139,7 +139,7 @@ export default class SearchTerm extends Component {
               </div>
             </div>
             <div className="row">
-
+              
             </div>
           </form>
         </div>
