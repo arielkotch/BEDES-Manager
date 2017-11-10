@@ -6,9 +6,28 @@ import {
   Button
 } from 'semantic-ui-react';
 
+import Option from './Option';
+
 export default class Term extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      optionList: []
+    };
+  }
+
+  componentDidMount() {
+    // check that termData exists
+    if (this.props.termData) {
+      let optionList = this.props.termData.Options.map((data, index) => {
+        return (
+          <Option data={data} />
+        );
+      });
+      this.setState({
+        optionList: optionList
+      });
+    }
   }
 
   // Delete term onClick
@@ -27,30 +46,29 @@ export default class Term extends Component {
 
   render() {
     return (
-      <Container>
-        <Segment.Group>
-          <Segment>Content-UUID: {this.props.termData['Content-UUID']}</Segment>
-          <Segment>URL: {this.props.termData['URL']}</Segment>
-          <Segment>Term: {this.props.termData['Term']}</Segment>
-          <Segment>Updated-date: {this.props.termData['Updated-date']}</Segment>
-          <Segment>Category: {this.props.termData['Category']}</Segment>
-          <Segment>Term-Definition: {this.props.termData['Term-Definition']}</Segment>
-          <Segment>Application: {this.props.termData['Application']}</Segment>
-          <Segment>Sector: {this.props.termData['Sector']}</Segment>
-          <Segment>Unit-of-Measure: {this.props.termData['Unit-of-Measure']}</Segment>
-          <Segment>URL: {this.props.termData['URL']}</Segment>
-          <Segment>Options: </Segment>
-          <Button onClick={this.handleDeleteButtonClick}>
-            Delete Term
-          </Button>
-        </Segment.Group>
-      </Container>
+      <Segment.Group>
+        <Segment>Content-UUID: {this.props.termData['Content-UUID']}</Segment>
+        <Segment>URL: {this.props.termData['URL']}</Segment>
+        <Segment>Term: {this.props.termData['Term']}</Segment>
+        <Segment>Updated-date: {this.props.termData['Updated-date']}</Segment>
+        <Segment>Category: {this.props.termData['Category']}</Segment>
+        <Segment>Term-Definition: {this.props.termData['Term-Definition']}</Segment>
+        <Segment>Application: {this.props.termData['Application']}</Segment>
+        <Segment>Sector: {this.props.termData['Sector']}</Segment>
+        <Segment>Unit-of-Measure: {this.props.termData['Unit-of-Measure']}</Segment>
+        <Segment>URL: {this.props.termData['URL']}</Segment>
+        <Segment>Options:
+          {this.state.optionList}
+        </Segment>
+        <Button onClick={this.handleDeleteButtonClick}>
+          Delete Term
+        </Button>
+      </Segment.Group>
     );
   }
 }
 
 
-// <div class="row">
 //   {
 //     this.props.termDataNotFound
 //     ?
@@ -65,20 +83,3 @@ export default class Term extends Component {
 //     :
 //       null
 //   }
-//   <div className="col s12">
-//     <div className="card-panel">
-//       <div>Content-UUID: {this.props.termData['Content-UUID']}</div>
-//       <div>URL: {this.props.termData['URL']}</div>
-//       <div>Term: {this.props.termData['Term']}</div>
-//       <div>Updated-date: {this.props.termData['Updated-date']}</div>
-//       <div>Category: {this.props.termData['Category']}</div>
-//       <div>Term-Definition: {this.props.termData['Term-Definition']}</div>
-//       <div>Application: {this.props.termData['Application']}</div>
-//       <div>Sector: {this.props.termData['Sector']}</div>
-//       <div>Unit-of-Measure: {this.props.termData['Unit-of-Measure']}</div>
-//       <div>URL: {this.props.termData['URL']}</div>
-//       <div>Options: {this.state.optionList}</div>
-//       <a className="waves-effect waves-light btn" onClick={this.handleDeleteButtonClick}>Delete Term</a>
-//     </div>
-//   </div>
-// </div>

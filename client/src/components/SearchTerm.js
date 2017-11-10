@@ -7,20 +7,16 @@ import {
 } from 'semantic-ui-react';
 
 import Term from './SearchTerm/Term';
-import Option from './SearchTerm/Option';
+
 
 export default class SearchTerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       uuid: '',
-      termData: true,
+      termData: undefined,
       termNotFound: false,
     };
-  }
-
-  componentDidMount() {
-
   }
 
   // Handler for uuid search input field
@@ -34,15 +30,8 @@ export default class SearchTerm extends Component {
       .then(function(response) {
         // console.log(response.data);
         const data = response.data;
-        let optionList;
         // Check that response data exists (if term was found with entered uuid)
         if (data) {
-          // Create array of option cards
-          optionList = data.Options.map((data, index) => {
-            return (
-              <Option data={data} />
-            );
-          });
           self.setState({
             termData: data,
             termNotFound: false
@@ -72,7 +61,8 @@ export default class SearchTerm extends Component {
           </Form.Field>
           <Button type='submit'>Search</Button>
         </Form>
-        <Term termData={this.state.termData} />
+        { this.state.termData ? <Term termData={this.state.termData} /> : null }
+
 
       </Container>
     );
