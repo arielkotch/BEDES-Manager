@@ -62,8 +62,6 @@ export default class SearchTerm extends Component {
           <Button type='submit'>Search</Button>
         </Form>
         { this.state.termData ? <Term termData={this.state.termData} /> : null }
-
-
       </Container>
     );
   }

@@ -17,6 +17,38 @@ const viewTerms = (app) => {
     });
   });
 
+  // Add term
+  app.post('/api/term/add', (req, res) => {
+      const uuid = req.body.uuid;
+      const url = req.body.url;
+      const _term = req.body.term;
+      const date = req.body.date;
+      const category = req.body.category;
+      const definition = req.body.definition;
+      const application = req.body.application;
+      const sector = req.body.sector;
+      const measure = req.body.measure;
+
+      const term = new Term({
+          'Content-UUID': uuid,
+          'URL': url,
+          'Term': _term,
+          'Updated-date': date,
+          'Category': category,
+          'Term-Definition': definition,
+          'Application': application,
+          'Sector': sector,
+          'Unit-of-Measure': measure
+      });
+        term.save()
+        .then(term => {
+          console.log('Term with Content-UUID: ' + uuid + ' added successfully.');
+        })
+        .catch(err => {
+          res.status(400).send('Failed to save to db.')
+        });
+    });
+
   // Delete term
   app.delete('/api/term/delete/:uuid', (req, res) => {
     const uuid = req.params.uuid;
