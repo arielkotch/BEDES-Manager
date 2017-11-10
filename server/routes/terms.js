@@ -19,6 +19,7 @@ const viewTerms = (app) => {
 
   // Add term
   app.post('/api/term/add', (req, res) => {
+    console.log(req.body);
       const uuid = req.body.uuid;
       const url = req.body.url;
       const _term = req.body.term;
@@ -71,19 +72,16 @@ const viewTerms = (app) => {
   // Search terms by keyword match with Term, Term-Definition or with Content-UUID
   app.get('/api/term/search/:query', (req, res) => {
     const query = req.params.query;
-    const queryRe = new RegExp(query);
     // regexObj for uuid
-    const uuidRe = new RegExp('^\\w{8}-\\w{4}-\\w{4}-\\w{12}$');
-    console.log(uuidRe);
+    const uuidRe = new RegExp('^\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}$');
     // check if query is a Content-UUID
     // eg: b3982f93-0868-4959-a6aa-bca5f6956947
     if (uuidRe.test(query)) {
       console.log("uuid...");
-      Term.findOne({ 'Content-UUID': uuid }, (err, term) => {
+      Term.findOne({ 'Content-UUID': query }, (err, term) => {
         if (err) {
           return handleError(err);
         }
-        console.log(term);
         if (term) {
           res.send(term);
         } else {
@@ -92,6 +90,7 @@ const viewTerms = (app) => {
       })
     } else {
       console.log("keyword...");
+      const queryRe = new RegExp(query);
       Term.find({ 'Term': { $regex: queryRe, $options: 'i' } }, (err, terms) => {
         if (err) {
           return handleError(err);
@@ -140,8 +139,6 @@ const viewTerms = (app) => {
       }
     })
   });
-
-
 
   // Export terms to XML
   app.get('/api/export-terms', (req, res) => {

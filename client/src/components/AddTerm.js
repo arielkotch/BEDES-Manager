@@ -31,6 +31,7 @@ export default class AddTerm extends Component {
   };
 
   handleSubmit(e) {
+      console.log(this.state.url);
       axios.post('http://localhost:5000/api/term/add', {
         'Content-UUID': this.state.uuid,
         'URL': this.state.url,

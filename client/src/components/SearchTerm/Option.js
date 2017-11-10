@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {
-  Container,
   Segment
 } from 'semantic-ui-react';
 
 export default class Option extends Component {
-  constructor(props) {
-    super(props);
-
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (

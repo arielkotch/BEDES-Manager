@@ -25,7 +25,9 @@ const configureServer = (app) => {
   // Routes for CSS, JS etc.
   // app.use(express.static(path.resolve(__dirname, '../frontend/controllers'), { redirect: false }));
 
-  // Express Config
+  // handle json data
+  app.use(bodyParser.json());
+  // handle URL-encoded data
   app.use(bodyParser.urlencoded({ extended: true }));
 
 }
