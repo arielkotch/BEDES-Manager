@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import {
+  Container
+} from 'semantic-ui-react';
 
 export default class UpdateTerm extends Component {
   render() {
     return (
-      <div>
-        Update term
-      </div>
+      <Container>
+        <p>Update term</p>
+      </Container>
     );
   }
 }

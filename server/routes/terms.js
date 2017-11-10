@@ -68,6 +68,24 @@ const viewTerms = (app) => {
     });
   });
 
+  // Search terms by keyword match
+  app.get('/api/term/keyword/:keyword', (req, res) => {
+    const keyword = req.params.keyword;
+    const keywordRe = new RegExp(keyword);
+    Term.find({ 'Term': { $regex: keywordRe, $options: 'i' } }, (err, terms) => {
+      if (err) {
+        return handleError(err);
+      }
+      else if (terms.length > 0) {
+      // Check that terms exists
+        res.send(terms);
+      } else {
+      // Sent message if no terms were found
+        res.send('No matching term found');
+      }
+    });
+  });
+
   // Get one term by UUID
   app.get('/api/term/:uuid', (req, res) => {
     const uuid = req.params.uuid;
@@ -83,6 +101,8 @@ const viewTerms = (app) => {
       }
     })
   });
+
+
 
   // Export terms to XML
   app.get('/api/export-terms', (req, res) => {

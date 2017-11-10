@@ -9,7 +9,6 @@ const initalXmlImport = (app) => {
   app.get('/api/initial-import', (req, res) => {
     // Check if Term collection has any documents
     Term.count({}, (err, count) => {
-      console.log(count);
       if (count === 0) {
         // Parser for converting xml to json
         const parser = new xml2js.Parser();

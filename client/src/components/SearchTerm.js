@@ -1,59 +1,39 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {
+  Container,
+  Button,
+  Form
+} from 'semantic-ui-react';
+
+import Term from './SearchTerm/Term';
+
 
 export default class SearchTerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       uuid: '',
-      term: true,
+      termData: undefined,
       termNotFound: false,
-      optionList: ''
     };
   }
 
-  componentDidMount() {
-
-  }
-
   // Handler for uuid search input field
-  handleChange = event => this.setState({ uuid: event.target.value });
+  handleUuidSearchChange = event => this.setState({ uuid: event.target.value });
 
-  // Handler for input submit
-  handleSubmit = event => {
+  // Handler for uuid search submit
+  handleUuidSearchSubmit = event => {
     // Save this in variable, self
     const self = this;
     axios.get('/api/term/' + this.state.uuid)
       .then(function(response) {
-        console.log(response.data);
+        // console.log(response.data);
         const data = response.data;
-        let optionList;
         // Check that response data exists (if term was found with entered uuid)
         if (data) {
-          // Create array of option cards
-          optionList = data.Options.map((option, index) => {
-            return (
-              <div className="row" key={index}>
-                <div className="col s12">
-                  <div className="card-panel">
-                    <div>Content-UUID: {option['Content-UUID']}</div>
-                    <div>URL: {option['URL']}</div>
-                    <div>Term: {option['Term']}</div>
-                    <div>Updated-date: {option['Updated-date']}</div>
-                    <div>Related-Term: {option['Related-Term']}</div>
-                    <div>Related-Term-UUID: {option['Related-Term-UUID']}</div>
-                    <div>Option-Definition: {option['Option-Definition']}</div>
-                    <div>Application: {option['Application']}</div>
-                    <div>Sector: {option['Sector']}</div>
-                    <div>Unit-of-Measure: {option['Unit-of-Measure']}</div>
-                  </div>
-                </div>
-              </div>
-            );
-          });
           self.setState({
-            term: data,
-            optionList: optionList,
+            termData: data,
             termNotFound: false
           });
         } else {
@@ -71,63 +51,18 @@ export default class SearchTerm extends Component {
     event.preventDefault();
   }
 
-  // Delete term onClick
-  handleDeleteButtonClick = () => {
-    axios.delete('/api/term/delete/' + this.state.term['Content-UUID'])
-      .then(function (response) {
-        console.log(response);
-        this.setState({
-          term: false
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   render() {
     return (
-      <div>
-        <form className="col s12" onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div className="input-field col s12">
-              <input id="seach_term" type="text" className="validate" onChange={this.handleChange} />
-              <label htmlFor="search_term">Enter UUID to search</label>
-              {
-                this.state.termNotFound
-                ?
-                  <div className="red-text">Term not found</div>
-                :
-                  null
-              }
-              {
-                this.state.termDeleted
-                ?
-                  <div className="red-text">Term deleted</div>
-                :
-                  null
-              }
-                <div className="row">
-                  <div className="col s12">
-                    <div className="card-panel">
-                      <div>Content-UUID: {this.state.term['Content-UUID']}</div>
-                      <div>URL: {this.state.term['URL']}</div>
-                      <div>Term: {this.state.term['Term']}</div>
-                      <div>Updated-date: {this.state.term['Updated-date']}</div>
-                      <div>Category: {this.state.term['Category']}</div>
-                      <div>Term-Definition: {this.state.term['Term-Definition']}</div>
-                      <div>Application: {this.state.term['Application']}</div>
-                      <div>Sector: {this.state.term['Sector']}</div>
-                      <div>Unit-of-Measure: {this.state.term['Unit-of-Measure']}</div>
-                      <div>Options: {this.state.optionList}</div>
-                      <a className="waves-effect waves-light btn" onClick={this.handleDeleteButtonClick}>Delete Term</a>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </form>
-      </div>
+      <Container>
+        <Form onSubmit={this.handleUuidSearchSubmit}>
+          <Form.Field>
+            <label>Search for term</label>
+            <input placeholder='Search for term' onChange={this.handleUuidSearchChange} />
+          </Form.Field>
+          <Button type='submit'>Search</Button>
+        </Form>
+        { this.state.termData ? <Term termData={this.state.termData} /> : null }
+      </Container>
     );
   }
 }

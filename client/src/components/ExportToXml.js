@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {
+  Container,
+  Button
+} from 'semantic-ui-react';
 
 export default class ExportToXml extends Component {
 
@@ -16,13 +20,11 @@ export default class ExportToXml extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col s12">
-          <div className="card-panel">
-            <div><a className="waves-effect waves-light btn" onClick={this.exportTermButtonClick}>Terms XML</a></div>
-          </div>
-        </div>
-      </div>
+      <Container>
+        <Button onClick={this.exportTermButtonClick}>
+          Export to XML
+        </Button>
+      </Container>
     );
   }
 }
