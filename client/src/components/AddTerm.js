@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
-  Container
+  Container,
+  Form,
+  Button
 } from 'semantic-ui-react';
 
 export default class AddTerm extends Component {
@@ -50,31 +52,20 @@ export default class AddTerm extends Component {
 
   render() {
     return (
-      <div>
-        <div className="card-panel">
-          Please fill the following form below to add your term.
-        </div>
-          <div className="row">
-            <div className="input-field col s12">
-                <div className="row">
-                  <div className="col s12">
-                        <form className="col s12" onSubmit={this.handleSubmit}>
-                          <input type="text" placeholder="Content-UUID" name="uuid"   value={this.state.uuid} onChange={this.handleChange}/>
-                          <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange}/>
-                          <input type="text" placeholder="Term" name="_term" value={this.state._term} onChange={this.handleChange}/>
-                          <input type="text" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
-                          <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
-                          <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={this.handleChange}/>
-                          <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={this.handleChange}/>
-                          <input type="text" placeholder="Sector" name="sector" value={this.state.sector} onChange={this.handleChange}/>
-                          <input type="text" placeholder="Unit-of-Measure" name="measure" value={this.state.measure} onChange={this.handleChange}/>
-                          <input type="submit" value="Submit" className="waves-effect waves-light btn"/>
-                        </form>
-                      </div>
-                </div>
-            </div>
-          </div>
-      </div>
+      <Container>
+        <Form onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Content-UUID" name="uuid"   value={this.state.uuid} onChange={this.handleChange}/>
+          <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange}/>
+          <input type="text" placeholder="Term" name="_term" value={this.state._term} onChange={this.handleChange}/>
+          <input type="text" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
+          <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
+          <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={this.handleChange}/>
+          <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={this.handleChange}/>
+          <input type="text" placeholder="Sector" name="sector" value={this.state.sector} onChange={this.handleChange}/>
+          <input type="text" placeholder="Unit-of-Measure" name="measure" value={this.state.measure} onChange={this.handleChange}/>
+          <Button type="submit" value="Submit">Submit</Button>
+        </Form>
+      </Container>
     );
   }
 }
