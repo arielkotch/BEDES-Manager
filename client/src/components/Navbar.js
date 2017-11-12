@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Container,
-  Menu,
-} from 'semantic-ui-react';
+import { Button, Container, Menu } from 'semantic-ui-react';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -45,7 +41,7 @@ export default class Navbar extends Component {
           <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item className='item'>
-              <Button as='a'>Log in</Button>
+              <Button as={ Link } to='/login' active={ this.state.loginActive } onClick={ this.handleNavbarButtonClick } id="login">Log in</Button>
             </Menu.Item>
             <Menu.Item>
               <Button as='a' primary>Sign Up</Button>
