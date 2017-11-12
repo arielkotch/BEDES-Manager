@@ -12,6 +12,8 @@ export default class Navbar extends Component {
       addActive: false,
       updateActive: false,
       exportActive: false,
+      loginActive: false,
+      signupActive: false
     };
   }
 
@@ -44,7 +46,7 @@ export default class Navbar extends Component {
               <Button as={ Link } to='/login' active={ this.state.loginActive } onClick={ this.handleNavbarButtonClick } id="login">Log in</Button>
             </Menu.Item>
             <Menu.Item>
-              <Button as='a' primary>Sign Up</Button>
+              <Button as={ Link } to='/signup' active={ this.state.signupActive } onClick={ this.handleNavbarButtonClick } id="signup" primary>Sign Up</Button>
             </Menu.Item>
           </Menu.Menu>
         </Container>
