@@ -8,8 +8,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose'); // MongoDB object modeling tool designed to work in an asynchronous environment
+const cors = require('cors');
 
-const configureServer = (app) => {
+const configureServer = (app, passport) => {
   // MongoDB Set Up (URI @ mongodb://localhost:27017/maalka_bedes)
   mongoose.Promise = global.Promise;
   mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
@@ -25,7 +26,8 @@ const configureServer = (app) => {
   app.use(morgan('dev')); // log every request to the console
   app.use(helmet());
   app.use(cookieParser()); // read cookies (needed for auth)
-
+  app.use(cors());
+  
   // handle json data
   app.use(bodyParser.json());
   // handle URL-encoded data
@@ -33,9 +35,9 @@ const configureServer = (app) => {
 
   // required for passport
   app.use(session({
-      secret: 'kjfdk1231lkdfsa0DGdkCa23k2',
-      resave: false,
-      saveUninitialized: false
+    secret: 'kjfdk1231lkdfsa0DGdkCa23k2',
+    resave: false,
+    saveUninitialized: false
   }));
 
   app.use(passport.initialize());
