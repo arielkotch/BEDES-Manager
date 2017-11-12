@@ -91,7 +91,8 @@ const viewTerms = (app) => {
     } else {
       console.log("keyword...");
       const queryRe = new RegExp(query);
-      Term.find({ 'Term': { $regex: queryRe, $options: 'i' } }, (err, terms) => {
+      // Find query match in Term or Term-Definition
+      Term.find({ $or: [ { 'Term': { $regex: queryRe, $options: 'i' } }, { 'Term-Definition': { $regex: queryRe, $options: 'i' } } ] }, (err, terms) => {
         if (err) {
           return handleError(err);
         }
@@ -100,7 +101,7 @@ const viewTerms = (app) => {
           res.send(terms);
         } else {
         // Sent message if no terms were found
-          res.send('No matching term found');
+          res.send(false);
         }
       });
     }
@@ -119,7 +120,7 @@ const viewTerms = (app) => {
         res.send(terms);
       } else {
       // Sent message if no terms were found
-        res.send('No matching term found');
+        res.send('No matching term found by keyword');
       }
     });
   });
@@ -135,7 +136,7 @@ const viewTerms = (app) => {
       if (term) {
         res.send(term);
       } else {
-        res.send(false);
+        res.send('No matching term found by uuid');
       }
     })
   });

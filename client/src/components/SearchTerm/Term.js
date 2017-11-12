@@ -1,39 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  Segment,
-  Button
-} from 'semantic-ui-react';
+import { Segment, Button } from 'semantic-ui-react';
 
 import Option from './Option';
 
 export default class Term extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      optionList: []
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //   };
+  // }
 
-  componentDidMount() {
-    // check that termData exists
-    if (this.props.termData) {
-      let optionList = this.props.termData.Options.map((data, index) => {
-        return (
-          <Option data={data} />
-        );
-      });
-      this.setState({
-        optionList: optionList
-      });
-    }
-  }
-
-  // Delete term onClick
+  // delete term onClick handler
   handleDeleteButtonClick = () => {
     axios.delete('/api/term/delete/' + this.state.term['Content-UUID'])
       .then(function (response) {
-        console.log(response);
         this.setState({
           term: false
         });
@@ -44,6 +25,13 @@ export default class Term extends Component {
   }
 
   render() {
+    // create list of Option components
+    let optionList = this.props.termData.Options.map((optionData, index) => {
+      return (
+        <Option optionData={optionData} key={index}/>
+      );
+    });
+
     return (
       <Segment.Group>
         <Segment>Content-UUID: {this.props.termData['Content-UUID']}</Segment>
@@ -57,7 +45,7 @@ export default class Term extends Component {
         <Segment>Unit-of-Measure: {this.props.termData['Unit-of-MeasureThe']}</Segment>
         <Segment>URL: {this.props.termData['URL']}</Segment>
         <Segment>Options:
-          {this.state.optionList}
+          {optionList}
         </Segment>
         <Button onClick={this.handleDeleteButtonClick}>
           Delete Term

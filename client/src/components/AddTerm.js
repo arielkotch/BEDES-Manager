@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  Container,
-  Form,
-  Button
-} from 'semantic-ui-react';
+import { Container, Form, Button } from 'semantic-ui-react';
 
 export default class AddTerm extends Component {
   constructor(props) {

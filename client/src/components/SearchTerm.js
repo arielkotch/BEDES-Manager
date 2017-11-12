@@ -8,37 +8,37 @@ import {
 
 import Term from './SearchTerm/Term';
 
-
 export default class SearchTerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uuid: '',
-      termData: undefined,
-      termNotFound: false,
+      query: '',
+      termData: {},
+      termFound: false,
     };
   }
 
   // Handler for uuid search input field
-  handleUuidSearchChange = event => this.setState({ uuid: event.target.value });
+  handleSearchChange = event => this.setState({ query: event.target.value });
 
   // Handler for uuid search submit
-  handleUuidSearchSubmit = event => {
+  handleSearchSubmit = event => {
     // Save this in variable, self
     const self = this;
-    axios.get('/api/term/' + this.state.uuid)
+    const { query } = this.state;
+    axios.get('/api/term/search/' + query)
       .then(function(response) {
         // console.log(response.data);
         const data = response.data;
-        // Check that response data exists (if term was found with entered uuid)
+        // check if term was found
         if (data) {
           self.setState({
             termData: data,
-            termNotFound: false
+            termFound: true
           });
         } else {
           self.setState({
-            termNotFound: true
+            termFound: false
           });
         }
 
@@ -52,16 +52,28 @@ export default class SearchTerm extends Component {
   }
 
   render() {
+    const termData = this.state.termData;
+    // terms variable will hold jsx for rendering terms
+    let terms;
+    // check if multiple terms were found
+    if (termData.length > 1) {
+      terms = termData.map((data, index) => {
+        return <Term termData={data} key={index} />
+      });
+    } else {
+      terms = <Term termData={this.state.termData} />;
+    }
+
     return (
       <Container>
-        <Form onSubmit={this.handleUuidSearchSubmit}>
+        <Form onSubmit={this.handleSearchSubmit}>
           <Form.Field>
             <label>Search for term</label>
-            <input placeholder='Search for term' onChange={this.handleUuidSearchChange} />
+            <input placeholder='Search for term' onChange={this.handleSearchChange} />
           </Form.Field>
           <Button type='submit'>Search</Button>
         </Form>
-        { this.state.termData ? <Term termData={this.state.termData} /> : null }
+        { this.state.termFound ?  terms : null }
       </Container>
     );
   }
