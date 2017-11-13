@@ -29,15 +29,15 @@ export default class AddTerm extends Component {
   handleSubmit(e) {
       console.log(this.state.url);
       axios.post('http://localhost:5000/api/term/add', {
-        'Content-UUID': this.state.uuid,
-        'URL': this.state.url,
-        'Term': this.state._term,
-        'Updated-date': this.state.date,
-        'Category': this.state.category,
-        'Term-Definition': this.state.definition,
-        'Application': this.state.application,
-        'Sector': this.state.sector,
-        'Unit-of-Measure': this.state.measure
+        uuid: this.state.uuid,
+        url: this.state.url,
+        _term: this.state._term,
+        date: this.state.date,
+        category: this.state.category,
+        definition: this.state.definition,
+        application: this.state.application,
+        sector: this.state.sector,
+        measure: this.state.measure
       })
       .then(function(response){
           console.log(response)

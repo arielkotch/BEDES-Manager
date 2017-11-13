@@ -1,15 +1,17 @@
 # node version
-FROM node:8
+FROM node:latest
 
 # create app directory
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/src/maalka_bedes
+
+WORKDIR /usr/src/maalka_bedes
 
 # install app dependencies
-COPY package.json package-lock.json ./
+COPY package.json /usr/src/maalka_bedes/
 RUN npm install
 
 # bundle app source
-COPY . .
+COPY . /usr/src/maalka_bedes
 
 # start runtime
 EXPOSE 3000
