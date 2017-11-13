@@ -19,7 +19,7 @@ const termSchema = mongoose.Schema({
   'Content-UUID': String,
   'URL': String,
   'Term': String,
-  'Updated-date': Date,
+  'Updated-date': String, //Date (need react to take date input only)
   'Category': String,
   'Term-Definition':  String,
   'Application': String,

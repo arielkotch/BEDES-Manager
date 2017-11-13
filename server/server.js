@@ -13,7 +13,7 @@ const cors = require('cors');
 const configureServer = (app, passport) => {
   // MongoDB Set Up (URI @ mongodb://localhost:27017/maalka_bedes)
   mongoose.Promise = global.Promise;
-  mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+  mongoose.connect(process.env.MONGODB_URI);
   mongoose.connection.on('error', (err) => {
     console.error(err);
     console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
