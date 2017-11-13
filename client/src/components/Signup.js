@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import  { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
@@ -8,8 +9,25 @@ export default class AddTerm extends Component {
     this.state = {
       email: '',
       password: '',
-      passwordRepeat: ''
+      passwordRepeat: '',
+      authenticated: false
     };
+  }
+
+  componentDidMount() {
+    const self = this;
+    // check if user is logged in
+    axios.get('/api/user/verify')
+      .then(function(res) {
+        console.log(res)
+        self.setState({
+          authenticated: res.data.authenticated
+        })
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   handleInputChange = event => {
@@ -19,10 +37,16 @@ export default class AddTerm extends Component {
   };
 
   handleFormSubmit = event => {
+    // Save this in variable, self
+    const self = this;
     const params = this.state;
     axios.post('/api/user/signup', params)
-      .then(function(response){
-        console.log(response)
+      .then(function(res) {
+        console.log(res)
+        self.setState({
+          authenticated: res.data.authenticated
+        })
+
       })
       .catch(function (error) {
         console.log(error);
@@ -32,6 +56,11 @@ export default class AddTerm extends Component {
   }
 
   render() {
+    const { authenticated } = this.state;
+    if (authenticated) {
+      return <Redirect to='/' />
+    }
+
     return (
       <div className='signup-form'>
         <Grid

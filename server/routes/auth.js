@@ -1,6 +1,9 @@
 const auth = (app, passport) => {
   // verify that the user is authenticated
   app.get('/api/user/verify', (req, res, next) => {
+    console.log('......');
+    console.log(req.user);
+    console.log(req.isAuthenticated());
   	if(req.user) {
   		return res.status(200).json({
   			user: req.user,
@@ -24,6 +27,9 @@ const auth = (app, passport) => {
         info['authenticated'] = false;
         return res.status(500).json(info);
       }
+      console.log("$$$$");
+      console.log(info);
+      console.log(user);
       req.logIn(user, function(err) {
         if (err) {
           return next(err);

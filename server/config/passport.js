@@ -36,8 +36,8 @@ module.exports = function(passport) {
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
-    console.log("###########");
-    console.log(req.body);
+    // console.log("###########");
+    // console.log(req.body);
     // asynchronous
     // User.findOne wont fire unless data is sent back
     process.nextTick(function() {

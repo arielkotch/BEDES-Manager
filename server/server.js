@@ -20,6 +20,8 @@ const configureServer = (app, passport) => {
     process.exit();
   });
 
+  // pass passport for configuration
+  require('./config/passport')(passport);
 
   app.use(morgan('dev')); // log every request to the console
   app.use(helmet());
@@ -41,9 +43,6 @@ const configureServer = (app, passport) => {
   app.use(passport.initialize());
   app.use(passport.session()); // persistent login sessions
   app.use(flash()); // use connect-flash for flash messages stored in session
-
-  // pass passport for configuration
-  require('./config/passport')(passport);
 }
 
 module.exports = configureServer;
