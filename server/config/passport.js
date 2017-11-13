@@ -51,11 +51,11 @@ module.exports = function(passport) {
 
         // check to see if theres already a user with that email
         if (user) {
-          return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+          return done(null, false, { signupMessage: 'That email is already taken.' });
         } else {
           // Check if password and re-entered password match
-          if (req.body.password !== req.body.password2) {
-            return done(null, false, req.flash('signupMessage', 'Passwords do not match.'));
+          if (req.body.password !== req.body.passwordRepeat) {
+            return done(null, false, { signupMessage: 'Passwords do not match.' });
           }
 
           // if there is no user with that email

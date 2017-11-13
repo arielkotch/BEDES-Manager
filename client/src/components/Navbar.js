@@ -18,14 +18,14 @@ export default class Navbar extends Component {
   }
 
   // handle navbar buttons to change active state to clicked button
-  handleNavbarButtonClick = e => {
+  handleNavbarButtonClick = event => {
     let activeStates = this.state;
     // reset all active states to false
     for (let prop in activeStates) {
       activeStates[prop] = false;
     }
     // set currently clicked button to true
-    activeStates[e.target.id + 'Active'] = true;
+    activeStates[event.target.id + 'Active'] = true;
     this.setState(activeStates);
   };
 

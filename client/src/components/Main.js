@@ -21,6 +21,6 @@ const Main = () => (
       <Route exact path='/signup' component={Signup} />
     </Switch>
   </main>
-);
+)
 
 export default Main;

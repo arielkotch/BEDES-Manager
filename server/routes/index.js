@@ -2,12 +2,12 @@
 
 const initalXmlImport = require('./initialXmlImport');
 const terms = require('./terms');
-const signup = require('./signup');
+const auth = require('./auth');
 
 const configureRoutes = (app, passport) => {
   initalXmlImport(app);
   terms(app);
-  signup(app, passport);
+  auth(app, passport);
 };
 
 module.exports = configureRoutes;

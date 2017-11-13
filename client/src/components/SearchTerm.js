@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  Container,
-  Button,
-  Form
-} from 'semantic-ui-react';
+import { Container, Button, Form } from 'semantic-ui-react';
 
 import Term from './SearchTerm/Term';
 
@@ -18,10 +14,13 @@ export default class SearchTerm extends Component {
     };
   }
 
-  // Handler for uuid search input field
-  handleSearchChange = event => this.setState({ query: event.target.value });
+  // Handler for search input field
+  // Set query state to user typed query
+  handleSearchChange = event => {
+    this.setState({ query: event.target.value });
+  }
 
-  // Handler for uuid search submit
+  // Handler for search submit
   handleSearchSubmit = event => {
     // Save this in variable, self
     const self = this;
@@ -41,8 +40,6 @@ export default class SearchTerm extends Component {
             termFound: false
           });
         }
-
-
       })
       .catch(function(error) {
         console.log(error);
@@ -66,10 +63,10 @@ export default class SearchTerm extends Component {
 
     return (
       <Container>
-        <Form onSubmit={this.handleSearchSubmit}>
+        <Form onSubmit={ this.handleSearchSubmit }>
           <Form.Field>
             <label>Search for term</label>
-            <input placeholder='Search for term' onChange={this.handleSearchChange} />
+            <input placeholder='Search for term' onChange={ this.handleSearchChange } />
           </Form.Field>
           <Button type='submit'>Search</Button>
         </Form>
