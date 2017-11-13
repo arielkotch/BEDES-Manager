@@ -20,8 +20,7 @@ const configureServer = (app) => {
 
   // Logger
   app.use(morgan('dev'));
-
-
+  
   // Routes for CSS, JS etc.
   // app.use(express.static(path.resolve(__dirname, '../frontend/controllers'), { redirect: false }));
 
