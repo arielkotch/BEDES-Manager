@@ -1,4 +1,3 @@
-// Bedes ? Schema here
 const mongoose = require('mongoose');
 
 // Define child options schema
