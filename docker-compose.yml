@@ -1,18 +1,17 @@
 version: "2"
 services:
-  app:
-    container_name: maalka_bedes
-    restart: always
+  client:
+    build: './client'
+  server:
     build: .
     ports:
-      - "3000:3000"
       - "5000:5000"
+      - "3000:3000"
     environment:
       MONGODB_URI: mongodb://mongo/maalka_bedes
     links:
-      - mongo
+        - mongo
   mongo:
-    container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
