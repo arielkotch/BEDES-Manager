@@ -13,10 +13,6 @@ const app = express();
 configureServer(app, passport);
 configureRoutes(app, passport);
 
-// Middleware to post data to server
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));

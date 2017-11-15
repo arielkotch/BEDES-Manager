@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  { Redirect } from 'react-router-dom'
+import  { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
@@ -7,9 +7,11 @@ export default class AddTerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      passwordRepeat: '',
+      signupParams: {
+        email: '',
+        password: '',
+        passwordRepeat: '',
+      },
       authenticated: false
     };
   }
@@ -19,6 +21,7 @@ export default class AddTerm extends Component {
     // check if user is logged in
     axios.get('/api/user/verify')
       .then(function(res) {
+        console.log("!!calling verify in signup.js")
         console.log(res)
         self.setState({
           authenticated: res.data.authenticated
@@ -31,24 +34,30 @@ export default class AddTerm extends Component {
   }
 
   handleInputChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    let signupParams = this.state.signupParams;
+    signupParams[event.target.name] = event.target.value;
+    this.setState(signupParams);
   };
 
   handleFormSubmit = event => {
     // Save this in variable, self
     const self = this;
-    const params = this.state;
-    axios.post('/api/user/signup', params)
+    const params = this.state.signupParams;
+
+    const config = {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    axios.post('/api/user/signup', params, config)
       .then(function(res) {
-        console.log(res)
         self.setState({
           authenticated: res.data.authenticated
         })
 
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
     // Prevent form default behavior

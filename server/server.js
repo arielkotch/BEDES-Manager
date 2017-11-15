@@ -13,7 +13,8 @@ const cors = require('cors');
 const configureServer = (app, passport) => {
   // MongoDB Set Up (URI @ mongodb://localhost:27017/maalka_bedes)
   mongoose.Promise = global.Promise;
-  mongoose.connect(process.env.MONGODB_URI);
+  // mongoose.connect(process.env.MONGODB_URI);
+  mongoose.connect('mongodb://localhost:27017/maalka_bedes');
   mongoose.connection.on('error', (err) => {
     console.error(err);
     console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
@@ -25,8 +26,20 @@ const configureServer = (app, passport) => {
 
   app.use(morgan('dev')); // log every request to the console
   app.use(helmet());
-  app.use(cookieParser()); // read cookies (needed for auth)
+  app.use(cookieParser('FNek1fdswoofjkdlvnc32Ca23k2')); // read cookies (needed for auth)
   app.use(cors());
+
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    } else {
+      next();
+    }
+  });
 
   // handle json data
   app.use(bodyParser.json());
@@ -35,7 +48,7 @@ const configureServer = (app, passport) => {
 
   // required for passport
   app.use(session({
-    secret: 'kjfdk1231lkdfsa0DGdkCa23k2',
+    secret: 'FNek1fdswoofjkdlvnc32Ca23k2',
     resave: false,
     saveUninitialized: false
   }));
