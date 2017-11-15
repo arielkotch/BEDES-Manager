@@ -32,9 +32,12 @@ export default class AddTerm extends Component {
   }
 
   handleInputChange = event => {
-    let signupParams = this.state.signupParams;
-    signupParams[event.target.name] = event.target.value;
-    this.setState(signupParams);
+    this.setState({
+      signupParams: {
+        ...this.state.signupParams,
+        [event.target.name]: event.target.value
+      }
+    });
   };
 
   handleFormSubmit = event => {

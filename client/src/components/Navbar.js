@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import axios from 'axios';
 import { Button, Container, Menu } from 'semantic-ui-react';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     // initial active values of menu buttons
@@ -21,6 +22,12 @@ export default class Navbar extends Component {
     };
   }
 
+  // componentWillReceiveProps() {
+  //   this.setState({
+  //     authenticated: this.props.authenticated
+  //   });
+  // }
+
   // handle navbar buttons to change active state to clicked button
   handleNavbarButtonClick = event => {
     let activeStates = this.state.activeStates;
@@ -31,6 +38,31 @@ export default class Navbar extends Component {
     // set currently clicked button to true
     activeStates[event.target.id + 'Active'] = true;
     this.setState(activeStates);
+  };
+
+  handleLogoutButtonClick = event => {
+    let activeStates = this.state.activeStates;
+    // reset all active states to false
+    for (let prop in activeStates) {
+      activeStates[prop] = false;
+    }
+    // set currently clicked button to true
+    activeStates[event.target.id + 'Active'] = true;
+    this.setState(activeStates);
+
+    const self = this;
+    // check if user is logged in
+    axios.get('/api/user/logout')
+      .then(function(res) {
+        console.log(res.data);
+        self.props.checkIfUserLoggedIn();
+        self.props.history.push('/');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
   };
 
   render() {
@@ -49,7 +81,7 @@ export default class Navbar extends Component {
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
             <Menu.Menu position='right'>
               <Menu.Item>
-                <Button as={ Link } to='/logout' active={ this.state.logoutActive } onClick={ this.handleNavbarButtonClick } id="logout" primary>Logout</Button>
+                <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
               </Menu.Item>
             </Menu.Menu>
           </Container>
@@ -81,3 +113,6 @@ export default class Navbar extends Component {
     );
   }
 }
+
+// Create a new component that is "connected" to the router.
+export default withRouter(Navbar)

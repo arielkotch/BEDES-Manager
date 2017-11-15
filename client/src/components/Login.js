@@ -31,9 +31,13 @@ export default class Login extends Component {
   }
 
   handleInputChange = event => {
-    let loginParams = this.state.loginParams;
-    loginParams[event.target.name] = event.target.value;
-    this.setState(loginParams);
+
+    this.setState({
+      loginParams: {
+        ...this.state.loginParams,
+        [event.target.name]: event.target.value
+      }
+    });
   };
 
   handleFormSubmit = event => {
@@ -47,9 +51,10 @@ export default class Login extends Component {
         'Content-Type': 'application/json',
       },
     };
-    
+
     axios.post('/api/user/login', params, config)
       .then(function(res) {
+        console.log(res.data);
         self.setState({
           authenticated: res.data.authenticated
         })

@@ -1,9 +1,9 @@
 const auth = (app, passport) => {
   // verify that the user is authenticated
   app.get('/api/user/verify', (req, res, next) => {
-    console.log('......');
-    console.log(req.user);
-    console.log(req.isAuthenticated());
+    // console.log('......');
+    // console.log(req.user);
+    // console.log(req.isAuthenticated());
   	if(req.isAuthenticated()) {
   		return res.status(200).json({
   			user: req.user,
@@ -75,7 +75,7 @@ const auth = (app, passport) => {
 
   app.get('/api/user/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    return res.status(200).send('Logged Out');
   });
 
   return app;

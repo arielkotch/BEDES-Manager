@@ -47,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar authenticated={ this.state.authenticated } />
+        <Navbar checkIfUserLoggedIn={ this.checkIfUserLoggedIn }  authenticated={ this.state.authenticated } />
         <Main checkIfUserLoggedIn={ this.checkIfUserLoggedIn } />
       </div>
     );
