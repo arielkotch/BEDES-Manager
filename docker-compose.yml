@@ -1,16 +1,20 @@
 version: "2"
 services:
+  
   client:
     build: './client'
+    ports:
+      - "3000:3000"
+
   server:
     build: .
     ports:
       - "5000:5000"
-      - "3000:3000"
     environment:
       MONGODB_URI: mongodb://mongo/maalka_bedes
     links:
         - mongo
+
   mongo:
     image: mongo
     ports:
