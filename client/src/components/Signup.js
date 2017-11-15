@@ -21,8 +21,6 @@ export default class AddTerm extends Component {
     // check if user is logged in
     axios.get('/api/user/verify')
       .then(function(res) {
-        console.log("!!calling verify in signup.js")
-        console.log(res)
         self.setState({
           authenticated: res.data.authenticated
         })

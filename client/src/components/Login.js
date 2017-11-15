@@ -7,10 +7,9 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signupParams: {
+      loginParams: {
         email: '',
         password: '',
-        passwordRepeat: '',
       },
       authenticated: false
     };
@@ -31,6 +30,38 @@ export default class Login extends Component {
       });
   }
 
+  handleInputChange = event => {
+    let loginParams = this.state.loginParams;
+    loginParams[event.target.name] = event.target.value;
+    this.setState(loginParams);
+  };
+
+  handleFormSubmit = event => {
+    // Save this in variable, self
+    const self = this;
+    const params = this.state.loginParams;
+
+    const config = {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    
+    axios.post('/api/user/login', params, config)
+      .then(function(res) {
+        self.setState({
+          authenticated: res.data.authenticated
+        })
+
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    // Prevent form default behavior
+    event.preventDefault();
+  }
+
   render() {
     const { authenticated } = this.state;
     if (authenticated) {
@@ -48,13 +79,16 @@ export default class Login extends Component {
             <Header as='h2' color='teal' textAlign='center'>
               Log-in to your account
             </Header>
-            <Form size='large'>
+            <Form size='large' onSubmit={ this.handleFormSubmit }>
               <Segment stacked>
                 <Form.Input
                   fluid
                   icon='user'
                   iconPosition='left'
                   placeholder='E-mail address'
+                  value={ this.state.email }
+                  onChange={ this.handleInputChange }
+                  name='email'
                 />
                 <Form.Input
                   fluid
@@ -62,8 +96,10 @@ export default class Login extends Component {
                   iconPosition='left'
                   placeholder='Password'
                   type='password'
+                  value={ this.state.password }
+                  onChange={ this.handleInputChange }
+                  name='password'
                 />
-
                 <Button color='teal' fluid size='large'>Login</Button>
               </Segment>
             </Form>

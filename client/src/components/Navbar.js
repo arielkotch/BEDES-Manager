@@ -15,27 +15,10 @@ export default class Navbar extends Component {
         updateActive: false,
         exportActive: false,
         loginActive: false,
-        signupActive: false
-      },
-      authenticated: false
+        signupActive: false,
+        logoutActive: false
+      }
     };
-  }
-
-  componentDidMount() {
-    const self = this;
-    // check if user is logged in
-    axios.get('/api/user/verify')
-      .then(function(res) {
-        console.log("###");
-        console.log(res)
-        self.setState({
-          authenticated: res.data.authenticated
-        })
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   // handle navbar buttons to change active state to clicked button
@@ -51,7 +34,7 @@ export default class Navbar extends Component {
   };
 
   render() {
-    const { authenticated } = this.state;
+    const authenticated = this.props.authenticated;
     if (authenticated) {
       return (
         <Menu inverted>
@@ -66,7 +49,7 @@ export default class Navbar extends Component {
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
             <Menu.Menu position='right'>
               <Menu.Item>
-                <Button as={ Link } to='/signup' active={ this.state.signupActive } onClick={ this.handleNavbarButtonClick } id="signup" primary>Sign Up</Button>
+                <Button as={ Link } to='/logout' active={ this.state.logoutActive } onClick={ this.handleNavbarButtonClick } id="logout" primary>Logout</Button>
               </Menu.Item>
             </Menu.Menu>
           </Container>

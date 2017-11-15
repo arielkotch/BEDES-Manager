@@ -9,6 +9,10 @@ export default class Home extends Component {
   //   super(props);
   // }
 
+  componentDidMount() {
+    this.props.checkIfUserLoggedIn();
+  }
+
   render() {
     return (
       <Container>
