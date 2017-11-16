@@ -1,12 +1,14 @@
 // Routes index
 
 const initalXmlImport = require('./initialXmlImport');
-const terms = require('./terms');
+const viewTerms = require('./terms');
+const proposedTerms = require('./proposed_terms');
 const auth = require('./auth');
 
 const configureRoutes = (app, passport) => {
   initalXmlImport(app);
-  terms(app);
+  proposedTerms(app);
+  viewTerms(app);
   auth(app, passport);
 };
 
