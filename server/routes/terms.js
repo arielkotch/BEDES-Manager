@@ -69,6 +69,24 @@ const viewTerms = (app) => {
     });
   });
 
+  // Search terms by category
+  app.get('/api/term/search/category/:category', (req, res) => {
+    const category = req.params.category;
+    // create regex with category
+    const categoryRe = new RegExp('^' + category + '$');
+    // search for matching categories without caring about case
+    Term.find({ Category: { $regex: categoryRe, $options: 'i' }}, (err, terms) => {
+      if (err) {
+        return handleError(err);
+      }
+      if (terms) {
+        res.send(terms);
+      } else {
+        res.send(false);
+      }
+    });
+  });
+
   // Search terms by keyword match with Term, Term-Definition or with Content-UUID
   app.get('/api/term/search/:query', (req, res) => {
     const query = req.params.query;
@@ -126,7 +144,7 @@ const viewTerms = (app) => {
   });
 
   // Get one term by UUID
-  app.get('/api/term/:uuid', (req, res) => {
+  app.get('/api/term/uuid/:uuid', (req, res) => {
     const uuid = req.params.uuid;
     Term.findOne({ 'Content-UUID': uuid }, (err, term) => {
       if (err) {
