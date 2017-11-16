@@ -1,12 +1,13 @@
 version: "2"
 services:
-  
   client:
+    container_name: bedes_client
     build: './client'
     ports:
       - "3000:3000"
 
   server:
+    container_name: bedes_server
     build: .
     ports:
       - "5000:5000"
@@ -16,6 +17,5 @@ services:
         - mongo
 
   mongo:
+    container_name: mongodb
     image: mongo
-    ports:
-      - "27017:27017"

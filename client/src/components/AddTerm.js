@@ -28,7 +28,7 @@ export default class AddTerm extends Component {
 
   handleSubmit(e) {
       console.log(this.state.url);
-      axios.post('/api/term/add', {
+      axios.post('/api/term/proposed/add', {
         uuid: this.state.uuid,
         url: this.state.url,
         _term: this.state._term,
@@ -54,7 +54,7 @@ export default class AddTerm extends Component {
           <input type="text" placeholder="Content-UUID" name="uuid"   value={this.state.uuid} onChange={this.handleChange}/>
           <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange}/>
           <input type="text" placeholder="Term" name="_term" value={this.state._term} onChange={this.handleChange}/>
-          <input type="text" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
+          <input type="date" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
           <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
           <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={this.handleChange}/>
           <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={this.handleChange}/>

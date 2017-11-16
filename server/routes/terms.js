@@ -11,44 +11,11 @@ const viewTerms = (app) => {
   });
 
   // Get all terms
-  app.get('/api/allterms', (req, res) => {
+  app.get('/api/term/all', (req, res) => {
     Term.find({}, (err, terms) => {
       res.json(terms);
     });
   });
-
-  // Add term
-  app.post('/api/term/add', (req, res) => {
-    console.log(req.body);
-      const uuid = req.body.uuid;
-      const url = req.body.url;
-      const _term = req.body.term;
-      const date = req.body.date;
-      const category = req.body.category;
-      const definition = req.body.definition;
-      const application = req.body.application;
-      const sector = req.body.sector;
-      const measure = req.body.measure;
-
-      const term = new Term({
-          'Content-UUID': uuid,
-          'URL': url,
-          'Term': _term,
-          'Updated-date': date,
-          'Category': category,
-          'Term-Definition': definition,
-          'Application': application,
-          'Sector': sector,
-          'Unit-of-Measure': measure
-      });
-        term.save()
-        .then(term => {
-          console.log('Term with Content-UUID: ' + uuid + ' added successfully.');
-        })
-        .catch(err => {
-          console.log('Failed to save to db.')
-        });
-    });
 
   // Delete term
   app.delete('/api/term/delete/:uuid', (req, res) => {
