@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Button, Form } from 'semantic-ui-react';
+import { Container, Button, Form, Checkbox } from 'semantic-ui-react';
 
 import Term from './SearchTerm/Term';
 
@@ -11,17 +11,18 @@ export default class SearchTerm extends Component {
       query: '',
       termData: {},
       termFound: false,
+      searchType: 'keyword'
     };
   }
 
   // Handler for search input field
   // Set query state to user typed query
-  handleSearchChange = event => {
+  handleKeywordSearchChange = event => {
     this.setState({ query: event.target.value });
   }
 
   // Handler for search submit
-  handleSearchSubmit = event => {
+  handleKeywordSearchSubmit = event => {
     // Save this in variable, self
     const self = this;
     const { query } = this.state;
@@ -48,6 +49,18 @@ export default class SearchTerm extends Component {
     event.preventDefault();
   }
 
+  onSearchByKeywordButtonClick = () => {
+    this.setState({
+      searchType: 'keyword'
+    });
+  }
+
+  onSearchByCategoryButtonClick= () => {
+    this.setState({
+      searchType: 'category'
+    });
+  }
+
   render() {
     const termData = this.state.termData;
     // terms variable will hold jsx for rendering terms
@@ -63,13 +76,45 @@ export default class SearchTerm extends Component {
 
     return (
       <Container>
-        <Form onSubmit={ this.handleSearchSubmit }>
-          <Form.Field>
-            <label>Search for term</label>
-            <input placeholder='Search for term' onChange={ this.handleSearchChange } />
-          </Form.Field>
-          <Button type='submit'>Search</Button>
-        </Form>
+        <Button onClick={ this.onSearchByKeywordButtonClick }>
+          Search with keyword/uuid
+        </Button>
+        <Button onClick={ this.onSearchByCategoryButtonClick }>
+          Search by category
+        </Button>
+        {
+          this.state.searchType === 'keyword' ?
+            <Form onSubmit={ this.handleKeywordSearchSubmit }>
+              <Form.Field>
+                <label>Search for term</label>
+                <input placeholder='Search for term' onChange={ this.handleKeywordSearchChange } />
+              </Form.Field>
+              <Button type='submit'>Search</Button>
+            </Form>
+          :
+          <Form onSubmit={ this.handleCategorySearchSubmit }>
+            <Form.Field>
+              <label>Categories</label>
+              <Checkbox label='Contact' />
+              <Checkbox label='Controls and Operations' />
+              <Checkbox label='Emissions' />
+              <Checkbox label='Envelope' />
+              <Checkbox label='Generation and Storage Equipment' />
+              <Checkbox label='Global Terms' />
+              <Checkbox label='HVAC' />
+              <Checkbox label='Loads' />
+              <Checkbox label='Measures' />
+              <Checkbox label='Metadata' />
+              <Checkbox label='Premises' />
+              <Checkbox label='Resource' />
+              <Checkbox label='Resources' />
+              <Checkbox label='Units' />
+              <Checkbox label='Waste' />
+            </Form.Field>
+            <Button type='submit'>Search</Button>
+          </Form>
+        }
+
         { this.state.termFound ?  terms : null }
       </Container>
     );
