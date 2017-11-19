@@ -37,12 +37,25 @@ const viewTerms = (app) => {
   });
 
   // Search terms by category
-  app.get('/api/term/search/category/:category', (req, res) => {
-    const category = req.params.category;
+  app.get('/api/term/search/category/', (req, res) => {
+    console.log(req.query);
+    const categoriesObj = req.query;
+    // array that will hold all the regex versions of the categories with true value
+    let categoriesRe = [];
+    // loop through categoriesObj
+    for (var key in categoriesObj) {
+      if (categoriesObj.hasOwnProperty(key)) {
+        if (categoriesObj[key] === 'true') {
+          const categoryRe = new RegExp('^' + key + '$', 'i');
+          categoriesRe.push(categoryRe);
+        }
+      }
+    }
+  console.log(categoriesRe);
     // create regex with category
-    const categoryRe = new RegExp('^' + category + '$');
+    // const categoryRe = new RegExp('^' + category + '$');
     // search for matching categories without caring about case
-    Term.find({ Category: { $regex: categoryRe, $options: 'i' }}, (err, terms) => {
+    Term.find({ Category: { $in: categoriesRe } }, (err, terms) => {
       if (err) {
         return handleError(err);
       }
