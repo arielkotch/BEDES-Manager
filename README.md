@@ -23,7 +23,22 @@ Go to http://127.0.0.1:5000/api/initial-import to do initial xml import into DB.
 
 ## Running the tests
 
+## Usage with Docker
+Docker is used to create containers, or a packaged application with all its parts, which helps eliminate the issues teams face with different development environments.
 
+Read more at https://www.docker.com/what-docker.
+
+For general purposes, the Community Edition of Docker is sufficient. Download the respective version for your machine at https://www.docker.com/community-edition.
+
+To start the application:
+```bash
+sudo docker-compose build
+sudo docker-compose up
+```
+To close the application:
+```bash
+sudo docker-compose down
+```
 
 ## Deployment
 
