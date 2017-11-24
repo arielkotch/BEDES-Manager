@@ -68,8 +68,15 @@ class Navbar extends Component {
   render() {
     const authenticated = this.props.authenticated;
     if (authenticated) {
+      const usertype = this.props.usertype;
+      // invert navbar colors if normal user
+      let inverted = true;
+      // don't invert navbar colors if admin
+      if (usertype === 'admin') {
+        inverted = false;
+      }
       return (
-        <Menu inverted>
+        <Menu inverted={ inverted }>
           <Container>
             <Menu.Item header onClick={ this.handleNavbarButtonClick } name="asdf">
               Bedes Manager

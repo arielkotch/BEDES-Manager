@@ -11,7 +11,7 @@ export default class AddTerm extends Component {
         email: '',
         password: '',
         passwordRepeat: '',
-        userType: ''
+        usertype: 'normal'
       },
       authenticated: false
     };
@@ -68,7 +68,10 @@ export default class AddTerm extends Component {
 
   handleUserTypeRadioButtonChange = (e, { value }) => {
     this.setState({
-      userType: value
+      signupParams: {
+        ...this.state.signupParams,
+        usertype: value
+      }
     });
   }
 
@@ -129,7 +132,7 @@ export default class AddTerm extends Component {
                     label='Normal'
                     name='userTypeRadioGroup'
                     value='normal'
-                    checked={this.state.userType === 'normal'}
+                    checked={this.state.signupParams.usertype === 'normal'}
                     onChange={this.handleUserTypeRadioButtonChange}
                   />
                 </Form.Field>
@@ -139,7 +142,7 @@ export default class AddTerm extends Component {
                     label='Admin'
                     name='userTypeRadioGroup'
                     value='admin'
-                    checked={this.state.userType === 'admin'}
+                    checked={this.state.signupParams.usertype === 'admin'}
                     onChange={this.handleUserTypeRadioButtonChange}
                   />
                 </Form.Field>
