@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Checkbox } from 'semantic-ui-react'
 
 export default class AddTerm extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ export default class AddTerm extends Component {
         email: '',
         password: '',
         passwordRepeat: '',
+        userType: ''
       },
       authenticated: false
     };
@@ -65,6 +66,12 @@ export default class AddTerm extends Component {
     event.preventDefault();
   }
 
+  handleUserTypeRadioButtonChange = (e, { value }) => {
+    this.setState({
+      userType: value
+    });
+  }
+
   render() {
     const { authenticated } = this.state;
     if (authenticated) {
@@ -113,6 +120,29 @@ export default class AddTerm extends Component {
                   onChange={ this.handleInputChange }
                   name='passwordRepeat'
                 />
+                <Form.Field>
+                  User Level:
+                </Form.Field>
+                <Form.Field>
+                  <Checkbox
+                    radio
+                    label='Normal'
+                    name='userTypeRadioGroup'
+                    value='normal'
+                    checked={this.state.userType === 'normal'}
+                    onChange={this.handleUserTypeRadioButtonChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Checkbox
+                    radio
+                    label='Admin'
+                    name='userTypeRadioGroup'
+                    value='admin'
+                    checked={this.state.userType === 'admin'}
+                    onChange={this.handleUserTypeRadioButtonChange}
+                  />
+                </Form.Field>
                 <Button color='teal' fluid size='large'>Sign Up</Button>
               </Segment>
             </Form>
