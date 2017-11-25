@@ -78,10 +78,9 @@ class Navbar extends Component {
       return (
         <Menu inverted={ inverted }>
           <Container>
-            <Menu.Item header onClick={ this.handleNavbarButtonClick } name="asdf">
+            <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
               Bedes Manager
             </Menu.Item>
-            <Menu.Item as={ Link } to='/' active={ this.state.homeActive } onClick={ this.handleNavbarButtonClick } id="home">Home</Menu.Item>
             <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
             <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Add</Menu.Item>
             <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
@@ -99,10 +98,9 @@ class Navbar extends Component {
     return (
       <Menu inverted>
         <Container>
-          <Menu.Item header onClick={ this.handleNavbarButtonClick } name="asdf">
+          <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
             Bedes Manager
           </Menu.Item>
-          <Menu.Item as={ Link } to='/' active={ this.state.homeActive } onClick={ this.handleNavbarButtonClick } id="home">Home</Menu.Item>
           <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
           <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Add</Menu.Item>
           <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
