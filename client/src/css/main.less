@@ -1,0 +1,441 @@
+body {
+    background: #F7F7F7;
+    font-family: "gesta";
+
+}
+.logo.maalka {
+  margin-left: 2em !important;
+  margin-right: 2em;
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+  height: 200px;
+}
+
+@media not print {
+  .print-only {
+    display: none !important;
+  }
+}
+
+.maalka-down-pointer:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -0.5em;
+    bottom: -1.5em;
+    pointer-events: none;
+    content: '';
+    visibility: visible;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 1em;
+    height: 1em;
+    background-color: rgb(247, 247, 247);
+    border-top: 1px solid rgba(34,36,38,.15);
+    border-left: 1px solid rgba(34,36,38,.15);
+    z-index: 2;
+}
+
+.maalka-data-entry-row-warning {
+    margin-left: -28px !important;
+    position: relative !important;
+    bottom: 25px !important;
+    height: 0px !important;
+    float: left;
+}
+
+.maalka-data-entry-row-add-top {    
+    margin-left: -28px !important;
+    position: relative !important;
+    height: 0px !important;
+    float: left;
+}
+
+.maalka-data-entry-row-add-start {    
+    margin-left: -28px !important;
+    position: relative !important;
+    bottom: 17px !important;
+    height: 0px !important;
+    float: left;
+}
+
+.maalka-data-entry-row-add-end {    
+    margin-left: -28px !important;
+    position: relative !important;
+    bottom: 3px !important;
+    height: 0px !important;
+    float: left;
+}
+
+.maalka-header.bar
+ {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    padding: 1em 0em;
+    z-index: 1000;  
+}
+.top.navigation.bar {
+  background-color: rgb(54,54,54) !important;
+  height: 47px;
+  text-align: center !important;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index:10;
+}
+
+#main {
+  background-color: #F7F7F7;
+  min-height: 600px;
+  margin-left: 178px;
+  margin-top: 18px;
+  min-width: 1054;
+  overflow-x: scroll;
+
+}
+
+.container {
+  padding-top: 120px;
+    background-color: #F7F7F7;
+    margin: 0em auto;
+    padding: 2em 2em 7em;
+    z-index: 1;
+}
+
+.topmargin100 {
+    margin-top: 100px;
+}
+.maalka-masthead {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 0em;
+    color: rgba(250, 250, 250, 1.0);
+    margin-bottom: 0px;
+    border-bottom: none;
+    height: 400px;
+    background: url("../images/14712864201_6a8ab78d7b_h.jpg") no-repeat center fixed;
+   -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    vertical-align: middle;
+    line-height: 200px;
+    font-size: 5em;
+    text-shadow: 1px 0 1px #777777, 2px 0 2px #777777, 0 0 1px #777777, -1px 0 1px #777777;
+    background-attachment: fixed;
+}
+
+//** d2 stuff... this needs to be cleaned up.  
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.nv-axis text, .heatmap text {
+  font-size: 9pt;
+  fill: #aaa;
+}
+text.dial-axis {
+  font-size: 9pt;
+}
+text.axis-worktime {
+  fill: #000;
+}
+
+/* AngularJS */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none;
+}
+
+#maalka .ui.sub.menu {
+  background-color: black;
+    opacity: 0.4;
+    -webkit-transition:opacity 0.5s, -webkit-transform 2s;
+      transition:opacity 0.5s, transform 2s
+}
+
+#maalka .maalka.sidebar-navable{ 
+  position: relative;
+}
+
+
+#maalka .maalka.sidebar-nav{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0px;
+  -webkit-transition:width 0.25s, -webkit-transform 2s;
+    transition:padding-left 0.25s, transform 2s
+}
+#maalka .maalka.sidebar-nav.out {
+  width: 200px;
+}
+
+#maalka .maalka.sidebar-body {
+  padding-left: 0px;
+    -webkit-transition:padding-left 0.25s, -webkit-transform 2s;
+    transition:padding-left 0.25s, transform 2s
+}
+
+#maalka .maalka.sidebar-body.out {
+  padding-left: 220px;
+
+
+}
+
+#maalka .hide {
+  max-height: 0;
+  overflow: hidden;
+
+}
+#maalka .show {
+  overflow: hidden;
+  max-height: 400px;
+
+}
+
+#maalka .form-toggle {
+  opacity: 1;
+  max-height: 100px;
+  transition: opacity 0s;
+  transition-delay: 0.25s;
+}
+
+#maalka .form-toggle.hide {
+  max-height: 0;
+  opacity: 0;
+  transition: opacity 0s;
+  overflow: hidden;
+}
+#maalka .transition.hide {
+  transition: max-height 0.25s ease-out
+}
+
+#maalka .transition.show {
+  transition: max-height 0.25s ease-in
+
+}
+
+#maalka .message-bar.ui.message {
+  position: fixed;
+  top: 0px;
+  margin: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: top 0.5s ease-in
+
+}
+
+#maalka .message-bar.ui.message.hide {
+  top: -300px;
+  transition: top 0.5s ease-out
+
+}
+
+.lime {
+  color: #D7DF23;
+}
+.kelly {
+  color: #8DC63F;
+}
+.light-stone {
+  color: #C2B59B;
+}
+.sunshine {
+  color: #FFDE17;
+}
+.stone{
+  color: #726658
+}
+.powered-by {
+  height: 50px;
+}
+
+.footer {
+  height: 155px;
+  fixed: bottom;
+}
+
+.ui.segment.smaller {
+  font-size: smaller;
+}
+
+.ui.steps .step.maalka {
+  vertical-align: top;
+}
+
+.portfolio.buildings.widget {
+  min-height: 100px;
+}
+
+.feed.portfolio.maalka {
+  max-height: 380px;
+  overflow: scroll;
+}
+
+.property .angular-google-map-container { height: 200px; width: 100%; margin: 0; }
+.portfolio .angular-google-map-container { height: 400px; }
+
+.angular-google-map-container { height: 200px; }
+.marker-label {
+   color: red;
+    background-color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid black;
+    white-space: nowrap;
+}
+.content.head {
+  position: relative;
+  z-index: 2;
+  padding: 1em 1em 1em 1em;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #DDDDDD;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0 2em, 0 2em;
+}
+
+div.chart { 
+  min-height: 200px;
+}
+
+.railed .rail .sticky {
+  left: 897.5px; 
+  width: 300px !important;
+  padding: 0px !important;
+  min-height: 300px;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 1024px){
+  .railed {
+      background-color: #FFFFFF;
+      margin-right: 350px;
+      min-height: 300px;
+      box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.05);
+      z-index: 1;
+      position: relative;
+  }
+}
+@media screen and (max-width: 1024px){
+  .rail {
+    display: none;
+  }
+} 
+
+.ui.primary.button {
+  background-color: #06a1f9;
+}
+
+#header { 
+  margin-bottom: 15px;
+}
+
+.googlemap .ui.header { 
+  color: #eeeeee;
+  text-shadow: -1px 0 #222222, 0 1px #222222, 1px 0 #222222, 0 -1px #222222;
+}
+
+.highcharts-container{
+  width:100% !important; 
+  height:100% !important;
+}
+
+.highcharts-tooltip span {
+  z-index: 9999 !important;
+  background-color: rgba(255,255,255,1) !important;
+  opacity: 1;
+}
+
+nvd3 svg {
+  height: auto !important;
+}
+
+
+svg text {
+  font: normal !important;
+  font-family: gesta,'Helvetica Neue',Arial,Helvetica,sans-serif !important;
+}
+
+svg .title {
+  font: normal !important;
+  font-family: gesta,'Helvetica Neue',Arial,Helvetica,sans-serif !important;
+}
+
+iframe.p-script {
+    overflow:hidden;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.highcharts-container {
+  width:100% !important; 
+  height:100% !important;
+}
+
+.mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset {
+  font-family: "gesta","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 1rem !important;
+  color: rgba(0,0,0,.87) !important;
+}
+.mce-tooltip * {
+  color: white !important;
+}
+
+.mce-menubar .mce-menubtn button span {
+  color: rgba(0,0,0,.87) !important;
+  font-size: 1rem;
+}
+
+.mce-ico {
+  font-family: 'tinymce',Arial !important;
+  color: rgba(0,0,0,.87) !important;
+  font-size: 1rem;
+}
+
+.mce-panel {
+  background-color: #F7F7F7 !important;
+  font-size: 1rem;
+}
+
+.mce-btn {
+  background-color: #F7F7F7 !important;
+  font-size: 1rem;
+}
+
+.mce-btn button {
+  background-color: #F7F7F7 !important;
+  font-size: 1rem;
+}
+
+.mce-ico {
+  font-size: 1rem !important;
+}
+
+.mce-container {
+  border-radius: 3px !important;
+}
+
+.cesium-infoBox-title {
+  border-top-left-radius: 0px !important;
+  background: #363636 !important;
+  
+}
+
+.cesium-infoBox {
+  border: none !important;
+  border-top-left-radius: 0px !important;
+  box-shadow: none !important;
+  background: inherit !important;
+}
