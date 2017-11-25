@@ -13,6 +13,7 @@ class Navbar extends Component {
         homeActive: true,
         searchActive: false,
         addActive: false,
+        listActive: false,
         updateActive: false,
         exportActive: false,
         loginActive: false,
@@ -83,7 +84,7 @@ class Navbar extends Component {
             </Menu.Item>
             <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
             <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Add</Menu.Item>
-            <Menu.Item as={ Link } to='/list' active={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
+            <Menu.Item as={ Link } to='/list' active={ this.state.listActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
             <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
             <Menu.Menu position='right'>
@@ -104,7 +105,7 @@ class Navbar extends Component {
           </Menu.Item>
           <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
           <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Add</Menu.Item>
-          <Menu.Item as={ Link } to='/list' active={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
+          <Menu.Item as={ Link } to='/list' active={ this.state.listActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
           <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
           <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
           <Menu.Menu position='right'>
