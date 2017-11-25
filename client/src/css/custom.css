@@ -8,3 +8,7 @@ body {
 .ui.menu {
   border-radius: 0rem;
 }
+
+.ui.checkbox input.hidden+label {
+  margin-left:2em;
+}

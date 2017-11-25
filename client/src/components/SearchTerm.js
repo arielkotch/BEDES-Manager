@@ -141,11 +141,13 @@ export default class SearchTerm extends Component {
         <Button onClick={ this.onSearchByCategoryButtonClick }>
           Search by category
         </Button>
+        <br/>
+        <br/>
         {
           this.state.searchType === 'keyword' ?
             <Form onSubmit={ this.handleKeywordSearchSubmit }>
               <Form.Field>
-                <label>Search for term</label>
+                <label>Search for Term</label>
                 <input placeholder='Search for term' onChange={ this.handleKeywordSearchChange } />
               </Form.Field>
               <Button type='submit'>Search</Button>
