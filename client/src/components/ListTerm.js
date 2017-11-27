@@ -25,9 +25,11 @@ export default class ListTerm extends Component {
   render() {
     return(
       <Container>
-        <Form.Field>
-          <label>All Proposed Terms</label>
-        </Form.Field>
+        <Form>
+          <Form.Field>
+            <label>All Proposed Terms</label>
+          </Form.Field>
+        </Form>
         <Table celled>
           <Table.Header>
             <Table.Row>
