@@ -21,8 +21,6 @@ npm start
 ```
 Go to http://127.0.0.1:5000/api/initial-import to do initial xml import into DB.
 
-## Running the tests
-
 ## Usage with Docker
 Docker is used to create containers, or a packaged application with all its parts, which helps eliminate the issues teams face with different development environments.
 
@@ -39,11 +37,6 @@ To close the application:
 ```bash
 sudo docker-compose down
 ```
-
-## Deployment
-
-
-
 ## Built With
 
 * [Node.js](https://nodejs.org/en/) - Javascript runtime for executing javascript code server-side
