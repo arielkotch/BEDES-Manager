@@ -36,7 +36,12 @@ export default class ListTerm extends Component {
               <Table.HeaderCell>No.</Table.HeaderCell>
               <Table.HeaderCell>UUID</Table.HeaderCell>
               <Table.HeaderCell>Term</Table.HeaderCell>
-              <Table.HeaderCell>Term</Table.HeaderCell>
+              <Table.HeaderCell>Date</Table.HeaderCell>
+              <Table.HeaderCell>Category</Table.HeaderCell>
+              <Table.HeaderCell>Definition</Table.HeaderCell>
+              <Table.HeaderCell>Application</Table.HeaderCell>
+              <Table.HeaderCell>Sector</Table.HeaderCell>
+              <Table.HeaderCell>Unit</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
         <Table.Body>
