@@ -15,6 +15,7 @@ class Navbar extends Component {
         addActive: false,
         updateActive: false,
         exportActive: false,
+        transformActive: false,
         loginActive: false,
         signupActive: false,
         logoutActive: false
@@ -68,6 +69,7 @@ class Navbar extends Component {
   render() {
     const authenticated = this.props.authenticated;
     if (authenticated) {
+      // show a different nav bar if logged in
       const usertype = this.props.usertype;
       // invert navbar colors if normal user
       let inverted = true;
@@ -86,6 +88,7 @@ class Navbar extends Component {
             <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Add</Menu.Item>
             <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
+            <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="export">Transform Term</Menu.Item>
             <Menu.Menu position='right'>
               <Menu.Item>
                 <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
@@ -107,6 +110,7 @@ class Navbar extends Component {
           <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Add</Menu.Item>
           <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
           <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
+          <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="export">Transform Term</Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item className='item'>
               <Button as={ Link } to='/login' active={ this.state.loginActive } onClick={ this.handleNavbarButtonClick } id="login">Log in</Button>
