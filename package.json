@@ -7,6 +7,7 @@
     "test": "mocha",
     "start": "npm run concurrent",
     "concurrent": "concurrently 'npm run server' 'cd client && npm start'",
+    "build": "cd client && npm build",
     "server": "nodemon server/app.js",
     "heroku-postbuild": "cd client/ && npm install --only=dev && npm install && npm run build",
     "devbuild": "npm install --only=dev && npm install && cd client/ && npm install --only=dev && npm install",
@@ -45,7 +46,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.15",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.76.0",
     "xml2js": "^0.4.19"
