@@ -6,9 +6,8 @@ const proposedSchema = mongoose.Schema({
     'URL': String,
     'Term': String,
     'Updated-date': Date,
-    'Related-Term': String,
-    'Related-Term-UUID': String,
-    'Option-Definition': String,
+    'Category': String,
+    'Term-Definition': String,
     'Application': String,
     'Sector': String,
     'Unit-of-Measure': String

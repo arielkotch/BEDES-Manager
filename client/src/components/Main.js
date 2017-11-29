@@ -9,6 +9,7 @@ import ExportToXml from './ExportToXml';
 import TransformTerm from './TransformTerm';
 import Login from './Login';
 import Signup from './Signup';
+import ListTerm from './ListTerm';
 
 export default class Main extends Component {
   render() {
@@ -25,6 +26,7 @@ export default class Main extends Component {
           <Route exact path='/update' component={UpdateTerm}/>
           <Route exact path='/export' component={ExportToXml}/>
           <Route exact path='/transform' component={TransformTerm}/>
+          <Route exact path='/list' component={ListTerm}/>
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
         </Switch>

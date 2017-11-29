@@ -89,8 +89,8 @@ export default class AddTerm extends Component {
           verticalAlign='middle'
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='teal' textAlign='center'>
-              Sign-up for an account
+            <Header as='h2' textAlign='center'>
+              Register for an account
             </Header>
             <Form size='large' onSubmit={ this.handleFormSubmit }>
               <Segment stacked>
@@ -146,7 +146,7 @@ export default class AddTerm extends Component {
                     onChange={this.handleUserTypeRadioButtonChange}
                   />
                 </Form.Field>
-                <Button color='teal' fluid size='large'>Sign Up</Button>
+                <Button color='blue' fluid size='large'>Sign Up</Button>
               </Segment>
             </Form>
             <Message>
