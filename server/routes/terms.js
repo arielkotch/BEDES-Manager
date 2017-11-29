@@ -158,12 +158,20 @@ const viewTerms = (app) => {
   // search term by term name and respond with Option names
   app.get('/api/options/:termname', (req, res) => {
     const termName = req.params.termname;
-    Term.findOne({ 'Term': termName }, (err, term) => {
+    const termNameRe = new RegExp(termName);
+    Term.findOne({ 'Term': { $regex: termNameRe, $options: 'i' } }, (err, term) => {
+      console.log('term...');
+      console.log(term);
       if (err) {
         return handleError(err);
+      } else if (term) {
+        // respond back with term options
+        res.send(term.Options);
+      } else {
+        // else respond with 'term not found'
+        res.send('Term not found');
       }
-      // respond back with term options
-      res.send(term.Options);
+
     });
   });
 

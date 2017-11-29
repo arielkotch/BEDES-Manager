@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Button, Form, Segment } from 'semantic-ui-react';
+import { Container, Button, Form, Segment, Dropdown } from 'semantic-ui-react';
 
 export default class ExportToXml extends Component {
   constructor(props) {
@@ -8,12 +8,23 @@ export default class ExportToXml extends Component {
     this.state = {
       numTerms: 1,
       termNames: {},
-      options: {}
+      allTermOptions: {}
     };
   }
 
+  // handler for term input
+  handleTermInputChange = (i, e) => {
+    const termName = e.target.value;
+    // update termNames object with new termName
+    const updatedtermNames = this.state.termNames;
+    updatedtermNames[i] = termName;
+    this.setState({
+      termNames: updatedtermNames
+    })
+  }
+
   // handler for add term button
-  addTermButtonClick = (event) => {
+  addTermButtonClick = () => {
     let numTermsPlusOne = this.state.numTerms + 1;
     this.setState({
       numTerms: numTermsPlusOne
@@ -22,23 +33,24 @@ export default class ExportToXml extends Component {
 
   // handler for show options button
   optionsButtonClick = (i) => {
-    const termName = event.target.value;
+    if (!this.state.termNames[i]) {
+      console.log('No term input');
+      return;
+    }
+    const termName = this.state.termNames[i];
     // Save this in variable, self
     const self = this;
-    axios.get('/api/option/' + termName)
+    axios.get('/api/options/' + termName)
       .then(function(response) {
         // data is the array of options
         const data = response.data;
         console.log(data);
         // update options object with new options
-        const updatedOptions = this.state.options;
+        const updatedOptions = self.state.allTermOptions;
         updatedOptions[i] = data;
-        // update termNames object with new termName
-        const updatedtermNames = this.state.termNames;
-        updatedtermNames[i] = termName;
+
         self.setState({
-          options: updatedOptions,
-          termNames: updatedtermNames
+          allTermOptions: updatedOptions,
         })
       })
       .catch(function(error) {
@@ -49,12 +61,27 @@ export default class ExportToXml extends Component {
   render() {
     let terms = [];
     for (let i = 0; i < this.state.numTerms; i++) {
+      let termOptions = this.state.allTermOptions[i];
+      // if options exist, create a dropdown input
+      let options;
+      if (termOptions) {
+        const optionNames = termOptions.map((e, i) => {
+          return {
+            key: e.Term + '_' + i,
+            value: e.Term,
+            text: e.Term
+          };
+        });
+        options = <Dropdown placeholder='Select Option' fluid search selection options={optionNames} />;
+      }
+
       terms.push(
         <Segment key={i}>
           <Form.Field>
             <label>Bedes Term</label>
-            <input placeholder='' onChange={ this.handleTermSearchChange }/>
+            <input placeholder='' onChange={ (e) => this.handleTermInputChange(i, e) }/>
             <Button onClick={() => this.optionsButtonClick(i) }>Options</Button>
+            { options }
           </Form.Field>
         </Segment>
       );
