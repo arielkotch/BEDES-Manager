@@ -155,7 +155,17 @@ const viewTerms = (app) => {
     });
   });
 
-
+  // search term by term name and respond with Option names
+  app.get('/api/options/:termname', (req, res) => {
+    const termName = req.params.termname;
+    Term.findOne({ 'Term': termName }, (err, term) => {
+      if (err) {
+        return handleError(err);
+      }
+      // respond back with term options
+      res.send(term.Options);
+    });
+  });
 
   return app;
 }

@@ -21,13 +21,15 @@ export default class ExportToXml extends Component {
   };
 
   // handler for show options button
-  optionsButtonClick = (event, i) => {
+  optionsButtonClick = (i) => {
     const termName = event.target.value;
     // Save this in variable, self
     const self = this;
     axios.get('/api/option/' + termName)
       .then(function(response) {
+        // data is the array of options
         const data = response.data;
+        console.log(data);
         // update options object with new options
         const updatedOptions = this.state.options;
         updatedOptions[i] = data;
@@ -51,7 +53,7 @@ export default class ExportToXml extends Component {
         <Segment key={i}>
           <Form.Field>
             <label>Bedes Term</label>
-            <input placeholder='' />
+            <input placeholder='' onChange={ this.handleTermSearchChange }/>
             <Button onClick={() => this.optionsButtonClick(i) }>Options</Button>
           </Form.Field>
         </Segment>
