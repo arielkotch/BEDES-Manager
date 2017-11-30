@@ -17,6 +17,15 @@ const viewTerms = (app) => {
     });
   });
 
+  // Get all term names
+  app.get('/api/term/allnames', (req, res) => {
+    Term.find({}, { 'Term': 1, '_id': 0 }, (err, terms) => {
+      res.json(terms.map(term => {
+        return term.Term;
+      }));
+    });
+  });
+
   // Delete term
   app.delete('/api/term/delete/:uuid', (req, res) => {
     const uuid = req.params.uuid;

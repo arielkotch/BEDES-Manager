@@ -46,7 +46,7 @@ export default class ExportToXml extends Component {
   };
 
   // handler for show options button
-  optionsButtonClick = (i) => {
+  showOptionsButtonClick = (i) => {
     if (!this.state.termNames[i]) {
       console.log('No term input');
       return;
@@ -70,6 +70,11 @@ export default class ExportToXml extends Component {
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  // remove term input Field
+  removeTermButtonClick = (i) => {
+
   }
 
   // handler for submit button click
@@ -116,7 +121,8 @@ export default class ExportToXml extends Component {
           <Form.Field>
             <label>Bedes Term</label>
             <input placeholder='' onChange={ (e) => this.handleTermInputChange(i, e) }/>
-            <Button onClick={() => this.optionsButtonClick(i) }>Options</Button>
+            <Button onClick={() => this.showOptionsButtonClick(i) }>Show Options</Button>
+            <Button onClick={() => this.removeTermButtonClick(i) }>Remove Term</Button>
             { options }
           </Form.Field>
         </Segment>
