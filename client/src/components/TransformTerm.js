@@ -8,7 +8,9 @@ export default class ExportToXml extends Component {
     this.state = {
       numTerms: 1,
       termNames: {},
-      allTermOptions: {}
+      allTermOptions: {},
+      pickedOptions: {},
+      bedesCompositeTerm: ''
     };
   }
 
@@ -22,6 +24,18 @@ export default class ExportToXml extends Component {
       termNames: updatedtermNames
     })
   }
+
+  // hanlder for option dropdown change
+  handleOptionDropdownChange = (i, e, data) => {
+    console.log(data.value);
+    const pickedOption = data.value;
+    // update pickedOptions object with new picked optionSchema
+    const updatedpickedOptions = this.state.pickedOptions;
+    updatedpickedOptions[i] = pickedOption;
+    this.setState({
+      pickedOptions: updatedpickedOptions
+    })
+  };
 
   // handler for add term button
   addTermButtonClick = () => {
@@ -58,13 +72,30 @@ export default class ExportToXml extends Component {
       });
   }
 
+  // handler for submit button click
+  submitButtonClick = () => {
+    let compositeTerm = '';
+    console.log(this.state.pickedOptions)
+    const pickedOptions = this.state.pickedOptions;
+    for (let i = 0; i < this.state.numTerms; i++) {
+      if (pickedOptions.hasOwnProperty(i)) {
+        compositeTerm += pickedOptions[i] + ' ';
+      }
+    }
+
+    this.setState({
+      bedesCompositeTerm: compositeTerm
+    });
+  };
+
   render() {
     let terms = [];
     for (let i = 0; i < this.state.numTerms; i++) {
       let termOptions = this.state.allTermOptions[i];
       // if options exist, create a dropdown input
       let options;
-      if (termOptions) {
+      // make sure termOptions is an array
+      if (Array.isArray(termOptions)) {
         const optionNames = termOptions.map((e, i) => {
           return {
             key: e.Term + '_' + i,
@@ -72,7 +103,12 @@ export default class ExportToXml extends Component {
             text: e.Term
           };
         });
-        options = <Dropdown placeholder='Select Option' fluid search selection options={optionNames} />;
+        options = <Dropdown
+                    placeholder='Select Option'
+                    fluid search selection
+                    options={optionNames}
+                    onChange={ (e, data) => this.handleOptionDropdownChange(i, e, data) }
+                  />;
       }
 
       terms.push(
@@ -109,8 +145,9 @@ export default class ExportToXml extends Component {
                 Add another term
               </Button>
             </Form.Field>
-            <Button type='submit'>Submit</Button>
+            <Button onClick={ this.submitButtonClick }>Submit</Button>
           </Form>
+          <p>{ this.state.bedesCompositeTerm }</p>
         </Container>
       </div>
     );

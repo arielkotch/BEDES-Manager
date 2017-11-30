@@ -160,8 +160,6 @@ const viewTerms = (app) => {
     const termName = req.params.termname;
     const termNameRe = new RegExp(termName);
     Term.findOne({ 'Term': { $regex: termNameRe, $options: 'i' } }, (err, term) => {
-      console.log('term...');
-      console.log(term);
       if (err) {
         return handleError(err);
       } else if (term) {
