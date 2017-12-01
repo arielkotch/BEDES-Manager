@@ -11,6 +11,7 @@ export default class ExportToXml extends Component {
       termNames: {},
       allTermOptions: {},
       pickedOptions: {},
+      valueTerm: '',
       bedesCompositeTerm: ''
     };
   }
@@ -30,6 +31,32 @@ export default class ExportToXml extends Component {
       });
   }
 
+  // show options when term is selected
+  showOptions = (i) => {
+    if (!this.state.termNames[i]) {
+      console.log('No term input');
+      return;
+    }
+    const termName = this.state.termNames[i];
+    // Save this in variable, self
+    const self = this;
+    axios.get('/api/options/' + termName)
+      .then(function(response) {
+        // data is the array of options
+        const data = response.data;
+        // update options object with new options
+        const updatedOptions = self.state.allTermOptions;
+        updatedOptions[i] = data;
+
+        self.setState({
+          allTermOptions: updatedOptions,
+        })
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
   // handler for term input
   handleTermDropDownChange = (i, e, data) => {
     const termName = data.value;
@@ -38,7 +65,9 @@ export default class ExportToXml extends Component {
     updatedtermNames[i] = termName;
     this.setState({
       termNames: updatedtermNames
-    })
+    });
+    // Show options
+    this.showOptions(i);
   }
 
   // hanlder for option dropdown change
@@ -61,33 +90,6 @@ export default class ExportToXml extends Component {
     });
   };
 
-  // handler for show options button
-  showOptionsButtonClick = (i) => {
-    if (!this.state.termNames[i]) {
-      console.log('No term input');
-      return;
-    }
-    const termName = this.state.termNames[i];
-    // Save this in variable, self
-    const self = this;
-    axios.get('/api/options/' + termName)
-      .then(function(response) {
-        // data is the array of options
-        const data = response.data;
-        console.log(data);
-        // update options object with new options
-        const updatedOptions = self.state.allTermOptions;
-        updatedOptions[i] = data;
-
-        self.setState({
-          allTermOptions: updatedOptions,
-        })
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
-
   // remove term input Field
   removeTermButtonClick = (i) => {
 
@@ -103,13 +105,24 @@ export default class ExportToXml extends Component {
         compositeTerm += pickedOptions[i] + ' ';
       }
     }
+    // Add bedes term related to value at the end of the compoisite term
+    compositeTerm += this.state.valueTerm;
 
     this.setState({
       bedesCompositeTerm: compositeTerm
     });
   };
 
+  // Handler for term related to value input field
+  // Set valueTerm state to the term that the user picked
+  handleValueTermChange = (e, data) => {
+    this.setState({ valueTerm: data.value });
+  }
+
   render() {
+    // get all term names to use for dropdown search input box
+    const allTermNames = this.state.allTermNames;
+
     let terms = [];
     for (let i = 0; i < this.state.numTerms; i++) {
       let termOptions = this.state.allTermOptions[i];
@@ -124,7 +137,7 @@ export default class ExportToXml extends Component {
             text: e.Term
           };
         });
-        console.log(optionNames);
+
         options = <Dropdown
                     placeholder='Select Option'
                     fluid search selection
@@ -132,9 +145,6 @@ export default class ExportToXml extends Component {
                     onChange={ (e, data) => this.handleOptionDropdownChange(i, e, data) }
                   />;
       }
-
-      // get all term names to use for dropdown search input box
-      const allTermNames = this.state.allTermNames;
 
       terms.push(
         <Segment key={i}>
@@ -146,7 +156,6 @@ export default class ExportToXml extends Component {
               options={allTermNames}
               onChange={ (e, data) => this.handleTermDropDownChange(i, e, data) }
             />;
-            <Button onClick={() => this.showOptionsButtonClick(i) }>Show Options</Button>
             <Button onClick={ this.addTermButtonClick }>Add another term</Button>
             <Button onClick={() => this.removeTermButtonClick(i) }>Remove Term</Button>
             { options }
@@ -172,6 +181,15 @@ export default class ExportToXml extends Component {
               <input placeholder='' />
             </Form.Field>
             {terms}
+            <Form.Field>
+              <label>Bedes Term Related to Value</label>
+              <Dropdown
+                placeholder='Search for bedes term related to value'
+                fluid search selection
+                options={allTermNames}
+                onChange={ this.handleValueTermChange }
+              />
+            </Form.Field>
             <Button onClick={ this.submitButtonClick }>Submit</Button>
           </Form>
           <p>{ this.state.bedesCompositeTerm }</p>
