@@ -17,11 +17,16 @@ const viewTerms = (app) => {
     });
   });
 
-  // Get all term names
+  // Get all term names to be used as options for dropdown input
   app.get('/api/term/allnames', (req, res) => {
     Term.find({}, { 'Term': 1, '_id': 0 }, (err, terms) => {
-      res.json(terms.map(term => {
-        return term.Term;
+      // create new array without any objects inside; it's just an array with the term names
+      res.json(terms.map((term, i) => {
+        return {
+          key: term.Term + '_' + i,
+          value: term.Term,
+          text: term.Term
+        }
       }));
     });
   });

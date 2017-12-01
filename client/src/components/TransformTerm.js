@@ -7,6 +7,7 @@ export default class ExportToXml extends Component {
     super(props);
     this.state = {
       numTerms: 1,
+      allTermNames: [],
       termNames: {},
       allTermOptions: {},
       pickedOptions: {},
@@ -14,9 +15,24 @@ export default class ExportToXml extends Component {
     };
   }
 
+  componentDidMount() {
+    const self = this;
+    // get list of term names
+    axios.get('/api/term/allnames/')
+      .then(function(response) {
+        const data = response.data;
+        self.setState({
+          allTermNames: data,
+        })
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
   // handler for term input
-  handleTermInputChange = (i, e) => {
-    const termName = e.target.value;
+  handleTermDropDownChange = (i, e, data) => {
+    const termName = data.value;
     // update termNames object with new termName
     const updatedtermNames = this.state.termNames;
     updatedtermNames[i] = termName;
@@ -108,6 +124,7 @@ export default class ExportToXml extends Component {
             text: e.Term
           };
         });
+        console.log(optionNames);
         options = <Dropdown
                     placeholder='Select Option'
                     fluid search selection
@@ -116,12 +133,21 @@ export default class ExportToXml extends Component {
                   />;
       }
 
+      // get all term names to use for dropdown search input box
+      const allTermNames = this.state.allTermNames;
+
       terms.push(
         <Segment key={i}>
           <Form.Field>
             <label>Bedes Term</label>
-            <input placeholder='' onChange={ (e) => this.handleTermInputChange(i, e) }/>
+            <Dropdown
+              placeholder='Search Term'
+              fluid search selection
+              options={allTermNames}
+              onChange={ (e, data) => this.handleTermDropDownChange(i, e, data) }
+            />;
             <Button onClick={() => this.showOptionsButtonClick(i) }>Show Options</Button>
+            <Button onClick={ this.addTermButtonClick }>Add another term</Button>
             <Button onClick={() => this.removeTermButtonClick(i) }>Remove Term</Button>
             { options }
           </Form.Field>
@@ -146,11 +172,6 @@ export default class ExportToXml extends Component {
               <input placeholder='' />
             </Form.Field>
             {terms}
-            <Form.Field>
-              <Button onClick={ this.addTermButtonClick }>
-                Add another term
-              </Button>
-            </Form.Field>
             <Button onClick={ this.submitButtonClick }>Submit</Button>
           </Form>
           <p>{ this.state.bedesCompositeTerm }</p>
