@@ -155,10 +155,16 @@ export default class ExportToXml extends Component {
               fluid search selection
               options={allTermNames}
               onChange={ (e, data) => this.handleTermDropDownChange(i, e, data) }
-            />;
-            <Button onClick={ this.addTermButtonClick }>Add another term</Button>
-            <Button onClick={() => this.removeTermButtonClick(i) }>Remove Term</Button>
+            />
             { options }
+            {
+              this.state.pickedOptions[i]
+              ?
+                <Button onClick={ this.addTermButtonClick }>Add another term</Button>
+              :
+                null
+            }
+            <Button onClick={() => this.removeTermButtonClick(i) }>Remove Term</Button>
           </Form.Field>
         </Segment>
       );
