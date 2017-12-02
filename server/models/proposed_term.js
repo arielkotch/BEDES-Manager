@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 // Schema for Proposed Terms
 const proposedSchema = mongoose.Schema({
-    'Content-UUID': String,
     'URL': String,
     'Term': String,
     'Updated-date': Date,
