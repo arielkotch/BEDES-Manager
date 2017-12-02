@@ -12,9 +12,8 @@ app.get('/api/term/proposed/all', (req, res) => {
 // Add proposed terms
 app.post('/api/term/proposed/add', (req, res) => {
   console.log(req.body);
-    const uuid = req.body.uuid;
     const url = req.body.url;
-    const _term = req.body.term;
+    const term = req.body.term;
     const date = req.body.date;
     const category = req.body.category;
     const definition = req.body.definition;
@@ -23,9 +22,8 @@ app.post('/api/term/proposed/add', (req, res) => {
     const measure = req.body.measure;
 
     const proposed_terms = new Proposed_Term({
-        'Content-UUID': uuid,
         'URL': url,
-        'Term': _term,
+        'Term': term,
         'Updated-date': date,
         'Category': category,
         'Term-Definition': definition,
@@ -35,7 +33,7 @@ app.post('/api/term/proposed/add', (req, res) => {
     });
       proposed_terms.save()
       .then(p_terms => {
-        console.log('Term with Content-UUID: ' + uuid + ' added successfully.');
+        console.log('Term: ' + term + ' added successfully.');
       })
       .catch(err => {
         console.log(err);

@@ -21,7 +21,7 @@ export default class Main extends Component {
             return <Home {...props} checkIfUserLoggedIn={ checkIfUserLoggedIn } />
           }}
           />
-          <Route exact path='/add' component={AddTerm}/>
+          <Route exact path='/propose' component={AddTerm}/>
           <Route exact path='/search' component={SearchTerm}/>
           <Route exact path='/update' component={UpdateTerm}/>
           <Route exact path='/export' component={ExportToXml}/>

@@ -6,9 +6,8 @@ export default class AddTerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uuid: '',
       url: '',
-      _term: '',
+      term: '',
       date: '',
       category: '',
       definition: '',
@@ -29,9 +28,8 @@ export default class AddTerm extends Component {
   handleSubmit(e) {
       console.log(this.state.url);
       axios.post('/api/term/proposed/add', {
-        uuid: this.state.uuid,
         url: this.state.url,
-        _term: this.state._term,
+        term: this.state.term,
         date: this.state.date,
         category: this.state.category,
         definition: this.state.definition,
@@ -52,10 +50,9 @@ export default class AddTerm extends Component {
       <Container>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <label>Add a Term</label>
-            <input type="text" placeholder="Content-UUID" name="uuid"   value={this.state.uuid} onChange={this.handleChange}/>
+            <label>Propose a Term</label>
             <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange}/>
-            <input type="text" placeholder="Term" name="_term" value={this.state._term} onChange={this.handleChange}/>
+            <input type="text" placeholder="Term" name="term" value={this.state.term} onChange={this.handleChange}/>
             <input type="date" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
             <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
             <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={this.handleChange}/>
