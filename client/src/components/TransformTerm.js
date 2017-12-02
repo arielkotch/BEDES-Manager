@@ -175,6 +175,10 @@ export default class ExportToXml extends Component {
         <Container>
           <Form>
             <Form.Field>
+              <label>Transform Name</label>
+              <input placeholder='' />
+            </Form.Field>
+            <Form.Field>
               <label>Implementation Field</label>
               <input placeholder='' />
             </Form.Field>
@@ -196,7 +200,7 @@ export default class ExportToXml extends Component {
                 onChange={ this.handleValueTermChange }
               />
             </Form.Field>
-            <Button onClick={ this.submitButtonClick }>Submit</Button>
+            <Button onClick={ this.submitButtonClick }>Create New Transform</Button>
           </Form>
           <p>{ this.state.bedesCompositeTerm }</p>
         </Container>
