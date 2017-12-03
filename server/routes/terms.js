@@ -154,7 +154,7 @@ const viewTerms = (app) => {
   });
 
   // Export terms to XML
-  app.get('/api/export-terms', (req, res) => {
+  app.get('/api/term/export', (req, res) => {
     // Find all terms and exclude _id and __v
     // lean() is used tell Mongoose to return a plan javascript version of returned doc
     Term.find({}, { '_id': 0, '__v': 0, 'Options': 0 }).lean().exec((err, terms) => {
@@ -172,12 +172,14 @@ const viewTerms = (app) => {
   // search term by term name and respond with Option names
   app.get('/api/options/:termname', (req, res) => {
     const termName = req.params.termname;
-    const termNameRe = new RegExp(termName);
-    Term.findOne({ 'Term': { $regex: termNameRe, $options: 'i' } }, (err, term) => {
+    const termNameRe = new RegExp('^' + termName + '$', 'i');
+    console.log(termNameRe);
+    Term.findOne({ 'Term': termNameRe }, (err, term) => {
       if (err) {
         return handleError(err);
       } else if (term) {
         // respond back with term options
+        console.log(term);
         res.send(term.Options);
       } else {
         // else respond with 'term not found'
