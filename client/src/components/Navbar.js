@@ -12,8 +12,8 @@ class Navbar extends Component {
       activeStates: {
         homeActive: true,
         searchActive: false,
-        addActive: false,
-        listActive: false,
+        proposeActive: false,
+        manageActive: false,
         updateActive: false,
         exportActive: false,
         transformActive: false,
@@ -85,8 +85,8 @@ class Navbar extends Component {
               Bedes Manager
             </Menu.Item>
             <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
-            <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Propose</Menu.Item>
-            <Menu.Item as={ Link } to='/list' active={ this.state.listActive } onClick={ this.handleNavbarButtonClick } id="list">Manage</Menu.Item>
+            <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
+            <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
             <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
             <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
@@ -107,8 +107,8 @@ class Navbar extends Component {
             Bedes Manager
           </Menu.Item>
           <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
-          <Menu.Item as={ Link } to='/add' active={ this.state.addActive } onClick={ this.handleNavbarButtonClick } id="add">Propose</Menu.Item>
-          <Menu.Item as={ Link } to='/list' active={ this.state.listActive } onClick={ this.handleNavbarButtonClick } id="list">Manage</Menu.Item>
+          <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
+          <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
           <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
           <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
           <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="export">New Transform</Menu.Item>
