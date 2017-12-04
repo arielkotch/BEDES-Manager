@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Button, Form, Segment, Dropdown } from 'semantic-ui-react';
+import { Container, Button, Form, Segment, Dropdown, Input } from 'semantic-ui-react';
 
-export default class ExportToXml extends Component {
+// import BedesTermInput from './BedesTermInput';
+
+export default class NewTransform extends Component {
   constructor(props) {
     super(props);
+
+    // each picked bedes term will have this object format
+    let bedesTerm = {
+      bedesTerm: '',
+      valueMapping: '',
+      bedesUnit: '',
+      unitConversion: ''
+    };
+
+    // initial states
     this.state = {
       numTerms: 1,
+      newTransform: {
+        transformName: '',
+        implementationField: '',
+        implementationValue: '',
+        implementationUnits: '',
+        terms: [bedesTerm],
+        bedesCompositeFieldName: ''
+      },
       allTermNames: [],
       termNames: {},
       allTermOptions: {},
@@ -29,6 +49,22 @@ export default class ExportToXml extends Component {
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return this.state.termNames !== nextState.termNames;
+  // }
+
+  handleTransformNameChange = (e, data) => {
+    const stateProp = data.name;
+    const value = data.value;
+
+    this.setState({
+      newTransform: {
+        ...this.state.newTransform,
+        [stateProp]: [value]
+      }
+    });
   }
 
   // show options when term is selected
@@ -95,10 +131,23 @@ export default class ExportToXml extends Component {
 
   }
 
-  // handler for submit button click
-  submitButtonClick = () => {
+  // Handler for term related to value input field
+  // Set valueTerm state to the term that the user picked
+  handleValueTermChange = (e, data) => {
+    this.setState({ valueTerm: data.value });
+  }
+
+  // handler for creatge new transform button click
+  createNewTransformButtonClick = () => {
+    // Get input values from refs
+    const transformName = this.refs.transformName.state.value[0];
+    const implementationField = this.refs.implementationField.state.value[0];
+    const impolmentationValue = this.refs.impolmentationValue.state.value[0];
+    const impolmentationUnits = this.refs.impolmentationUnits.state.value[0];
+
+    console.log(this.refs.transformName.state.value[0]);
     let compositeTerm = '';
-    console.log(this.state.pickedOptions)
+    // console.log(this.state.pickedOptions)
     const pickedOptions = this.state.pickedOptions;
     for (let i = 0; i < this.state.numTerms; i++) {
       if (pickedOptions.hasOwnProperty(i)) {
@@ -112,12 +161,6 @@ export default class ExportToXml extends Component {
       bedesCompositeTerm: compositeTerm
     });
   };
-
-  // Handler for term related to value input field
-  // Set valueTerm state to the term that the user picked
-  handleValueTermChange = (e, data) => {
-    this.setState({ valueTerm: data.value });
-  }
 
   render() {
     // get all term names to use for dropdown search input box
@@ -176,21 +219,22 @@ export default class ExportToXml extends Component {
           <Form>
             <Form.Field>
               <label>Transform Name</label>
-              <input placeholder='' />
+              <FormInput ref='transformName' />
             </Form.Field>
             <Form.Field>
               <label>Implementation Field</label>
-              <input placeholder='' />
+              <FormInput ref='implementationField' />
             </Form.Field>
             <Form.Field>
               <label>Implementation Value</label>
-              <input placeholder='' />
+              <FormInput ref='impolmentationValue' />
             </Form.Field>
             <Form.Field>
               <label>Implementation Units</label>
-              <input placeholder='' />
+              <FormInput ref='impolmentationUnits' />
             </Form.Field>
-            {terms}
+            { terms }
+
             <Form.Field>
               <label>Bedes Term Related to Value</label>
               <Dropdown
@@ -200,11 +244,37 @@ export default class ExportToXml extends Component {
                 onChange={ this.handleValueTermChange }
               />
             </Form.Field>
-            <Button onClick={ this.submitButtonClick }>Create New Transform</Button>
+            <Button onClick={ this.createNewTransformButtonClick }>Create New Transform</Button>
           </Form>
           <p>{ this.state.bedesCompositeTerm }</p>
         </Container>
       </div>
+    );
+  }
+}
+
+// this is used so input value changes don't have to rerender the entire NewTransform
+class FormInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    }
+  }
+
+  inputChange = (e, data) => {
+    this.setState({
+      value: [data.value]
+    });
+  }
+
+  render() {
+    return (
+      <Input
+        placeholder=''
+        value={ this.state.value }
+        onChange={ this.inputChange }
+      />
     );
   }
 }

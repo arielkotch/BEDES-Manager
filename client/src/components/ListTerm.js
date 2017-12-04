@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Form, Table, Label } from 'semantic-ui-react';
+import { Container, Form, Table } from 'semantic-ui-react';
 
 export default class ListTerm extends Component {
   constructor(props){

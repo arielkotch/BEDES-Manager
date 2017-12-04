@@ -6,7 +6,7 @@ import SearchTerm from './SearchTerm';
 import UpdateTerm from './UpdateTerm';
 import AddTerm from './AddTerm';
 import ExportToXml from './ExportToXml';
-import TransformTerm from './TransformTerm';
+import NewTransform from './NewTransform';
 import Login from './Login';
 import Signup from './Signup';
 import ListTerm from './ListTerm';
@@ -25,7 +25,7 @@ export default class Main extends Component {
           <Route exact path='/search' component={SearchTerm}/>
           <Route exact path='/update' component={UpdateTerm}/>
           <Route exact path='/export' component={ExportToXml}/>
-          <Route exact path='/transform' component={TransformTerm}/>
+          <Route exact path='/transform' component={NewTransform}/>
           <Route exact path='/list' component={ListTerm}/>
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
