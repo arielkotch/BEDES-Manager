@@ -5,7 +5,7 @@ import { Container, Button } from 'semantic-ui-react';
 export default class ExportToXml extends Component {
 
   exportTermButtonClick = () => {
-    axios.get('/api/export-terms')
+    axios.get('/api/term/export')
       .then(function (response) {
         // console.log(response);
 

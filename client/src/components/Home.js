@@ -23,7 +23,7 @@ export default class Home extends Component {
           <div className="row">
             <div className="column">
               <div className="ui message">
-                  <p>A project to ease the management of the management of terms in the Building Energy Data Exchange Standard dictionary.</p>
+                  <p>A project to ease the management of terms in the Building Energy Data Exchange Standard dictionary.</p>
                   <h3>Source Code</h3>
                   <a href="https://github.com/Maalka/BEDES-Manager">github.com/Maalka/BEDES-Manager</a>
                   <h3>BEDES Dictionary</h3>
