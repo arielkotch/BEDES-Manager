@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Container, Button, Form, Segment, Dropdown, Input } from 'semantic-ui-react';
 
+import TransformsAccordian from './NewTransform/TransformsAccordian';
 // import BedesTermInput from './BedesTermInput';
 
 export default class NewTransform extends Component {
@@ -9,30 +10,31 @@ export default class NewTransform extends Component {
     super(props);
 
     // each picked bedes term will have this object format
-    let bedesTerm = {
-      bedesTerm: '',
-      valueMapping: '',
-      bedesUnit: '',
-      unitConversion: ''
-    };
+    // let bedesTerm = {
+    //   bedesTerm: '',
+    //   valueMapping: '',
+    //   bedesUnit: '',
+    //   unitConversion: ''
+    // };
 
     // initial states
     this.state = {
+      allTermNames: [],
+      allTermOptions: {},
       numTerms: 1,
       newTransform: {
         transformName: '',
         implementationField: '',
         implementationValue: '',
         implementationUnits: '',
-        terms: [bedesTerm],
         bedesCompositeFieldName: ''
       },
-      allTermNames: [],
-      termNames: {},
-      allTermOptions: {},
-      pickedOptions: {},
+      bedesTerms: {},
+      valueMappings: {},
       valueTerm: '',
-      bedesCompositeTerm: ''
+      valueTermTransform: {},
+      newTransforms: [],
+      transformsAccordianShown: false
     };
   }
 
@@ -52,7 +54,7 @@ export default class NewTransform extends Component {
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
-  //   return this.state.termNames !== nextState.termNames;
+  //   return this.state.bedesTerms !== nextState.bedesTerms;
   // }
 
   handleTransformNameChange = (e, data) => {
@@ -69,11 +71,11 @@ export default class NewTransform extends Component {
 
   // show options when term is selected
   showOptions = (i) => {
-    if (!this.state.termNames[i]) {
+    if (!this.state.bedesTerms[i]) {
       console.log('No term input');
       return;
     }
-    const termName = this.state.termNames[i];
+    const termName = this.state.bedesTerms[i];
     // Save this in variable, self
     const self = this;
     axios.get('/api/options/' + termName)
@@ -96,25 +98,24 @@ export default class NewTransform extends Component {
   // handler for term input
   handleTermDropDownChange = (i, e, data) => {
     const termName = data.value;
-    // update termNames object with new termName
-    const updatedtermNames = this.state.termNames;
-    updatedtermNames[i] = termName;
+
+    const updatedTermNames = this.state.bedesTerms;
+    updatedTermNames[i] = termName;
     this.setState({
-      termNames: updatedtermNames
+      bedesTerms: updatedTermNames
     });
     // Show options
     this.showOptions(i);
   }
 
-  // hanlder for option dropdown change
+  // handler for option dropdown change
   handleOptionDropdownChange = (i, e, data) => {
-    console.log(data.value);
     const pickedOption = data.value;
-    // update pickedOptions object with new picked optionSchema
-    const updatedpickedOptions = this.state.pickedOptions;
-    updatedpickedOptions[i] = pickedOption;
+    // update valueMappings object with new picked optionSchema
+    const updatedvalueMappings = this.state.valueMappings;
+    updatedvalueMappings[i] = pickedOption;
     this.setState({
-      pickedOptions: updatedpickedOptions
+      valueMappings: updatedvalueMappings
     })
   };
 
@@ -134,7 +135,10 @@ export default class NewTransform extends Component {
   // Handler for term related to value input field
   // Set valueTerm state to the term that the user picked
   handleValueTermChange = (e, data) => {
-    this.setState({ valueTerm: data.value });
+    // set valueTerm to input value
+    this.setState({
+      valueTerm: data.value
+    });
   }
 
   // handler for creatge new transform button click
@@ -142,23 +146,60 @@ export default class NewTransform extends Component {
     // Get input values from refs
     const transformName = this.refs.transformName.state.value[0];
     const implementationField = this.refs.implementationField.state.value[0];
-    const impolmentationValue = this.refs.impolmentationValue.state.value[0];
-    const impolmentationUnits = this.refs.impolmentationUnits.state.value[0];
+    const implementationValue = this.refs.implementationValue.state.value[0];
+    const implementationUnits = this.refs.implementationUnits.state.value[0];
 
-    console.log(this.refs.transformName.state.value[0]);
-    let compositeTerm = '';
-    // console.log(this.state.pickedOptions)
-    const pickedOptions = this.state.pickedOptions;
+    let newTransforms = [];
+
+    const bedesTerms = this.state.bedesTerms;
+    const valueMappings = this.state.valueMappings;
+    const bedesUnits = '';
+    const unitConversion = '';
+    const valueTerm = this.state.valueTerm;
+
+    // construct bedes composite field name
+    let bedesCompositeFieldName = '';
     for (let i = 0; i < this.state.numTerms; i++) {
-      if (pickedOptions.hasOwnProperty(i)) {
-        compositeTerm += pickedOptions[i] + ' ';
-      }
+      bedesCompositeFieldName += valueMappings[i] + ' ';
     }
     // Add bedes term related to value at the end of the compoisite term
-    compositeTerm += this.state.valueTerm;
+    bedesCompositeFieldName += valueTerm;
+
+    // create array of new transforms, one for each selected bedes term
+    for (let i = 0; i < this.state.numTerms; i++) {
+      if (valueMappings.hasOwnProperty(i) && bedesTerms.hasOwnProperty(i)) {
+        newTransforms.push({
+          'Transform Name': transformName,
+          'Implementation Field': implementationField,
+          'Implmentation Value': implementationValue,
+          'Implmentation Units': implementationUnits,
+          'BEDES Term': bedesTerms[i],
+          'Value Mapping': valueMappings[i],
+          'BEDES Unit': bedesUnits,
+          'Unit Conversion': unitConversion,
+          'BEDES Composite Field Name': bedesCompositeFieldName
+        });
+      }
+    }
+
+    const bedesTerm = this.state.valueTerm;
+    // transform for value bedes term
+    const valueTermTransform = {
+      'Transform Name': transformName,
+      'Implementation Field': implementationField,
+      'Implmentation Value': implementationValue,
+      'Implmentation Units': implementationUnits,
+      'BEDES Term': bedesTerm,
+      'Value Mapping': implementationValue,
+      'BEDES Unit': bedesUnits,
+      'Unit Conversion': unitConversion,
+      'BEDES Composite Field Name': bedesCompositeFieldName
+    };
 
     this.setState({
-      bedesCompositeTerm: compositeTerm
+      newTransforms: newTransforms,
+      valueTermTransform: valueTermTransform,
+      transformsAccordianShown: true
     });
   };
 
@@ -201,7 +242,7 @@ export default class NewTransform extends Component {
             />
             { options }
             {
-              this.state.pickedOptions[i]
+              this.state.valueMappings[i]
               ?
                 <Button onClick={ this.addTermButtonClick }>Add another term</Button>
               :
@@ -227,11 +268,11 @@ export default class NewTransform extends Component {
             </Form.Field>
             <Form.Field>
               <label>Implementation Value</label>
-              <FormInput ref='impolmentationValue' />
+              <FormInput ref='implementationValue' />
             </Form.Field>
             <Form.Field>
               <label>Implementation Units</label>
-              <FormInput ref='impolmentationUnits' />
+              <FormInput ref='implementationUnits' />
             </Form.Field>
             { terms }
 
@@ -246,7 +287,16 @@ export default class NewTransform extends Component {
             </Form.Field>
             <Button onClick={ this.createNewTransformButtonClick }>Create New Transform</Button>
           </Form>
-          <p>{ this.state.bedesCompositeTerm }</p>
+          {
+            this.state.transformsAccordianShown
+            ?
+              <Segment>
+                <p>Transforms: </p>
+                <TransformsAccordian newTransformsData={this.state.newTransforms} valueTermTransformData={this.state.valueTermTransform} />
+              </Segment>
+            :
+              null
+          }
         </Container>
       </div>
     );
