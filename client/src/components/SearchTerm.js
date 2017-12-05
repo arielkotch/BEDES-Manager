@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Button, Form, Checkbox, Dropdown } from 'semantic-ui-react';
+import { Container, Button, Form, Checkbox, Dropdown, Segment } from 'semantic-ui-react';
 
 import FoundTerms from './SearchTerm/FoundTerms';
 
@@ -85,7 +85,7 @@ export default class SearchTerm extends Component {
     // Save this in variable, self
     const self = this;
     const { query } = this.state;
-    axios.get('/api/term/search/' + query)
+    axios.get('/api/term/search/exact-term-name/' + query)
       .then(function(response) {
         const data = response.data;
         // check if term was found
@@ -151,28 +151,26 @@ export default class SearchTerm extends Component {
     return (
       <Container>
         <Button onClick={ this.onSearchByKeywordButtonClick }>
-          Search with keyword/uuid
+          Search by Term
         </Button>
         <Button onClick={ this.onSearchByCategoryButtonClick }>
-          Search by category
+          Search by Category
         </Button>
         <br/>
         <br/>
         {
           this.state.searchType === 'keyword' ?
-            <Form onSubmit={ this.handleKeywordSearchSubmit }>
-              <Form.Field>
-                <label>Search for Term</label>
-                <Dropdown
-                  placeholder='Search Term'
-                  fluid search selection
-                  options={allTermNames}
-                  onChange={ this.handleTermDropDownChange }
-                />
-              </Form.Field>
-            </Form>
+            <Segment>
+              <label>Search for Term</label>
+              <Dropdown
+                placeholder='Search Term'
+                fluid search selection
+                options={allTermNames}
+                onChange={ this.handleTermDropDownChange }
+              />
+            </Segment>
           :
-          <Form onSubmit={ this.handleCategorySearchSubmit }>
+          <Form >
             <Form.Field>
               <label>Categories</label>
               <Checkbox label='Contact' onClick={ () => this.handleCheckboxClick('Contact') } />
@@ -191,7 +189,7 @@ export default class SearchTerm extends Component {
               <Checkbox label='Units' onClick={ () => this.handleCheckboxClick('Units') } />
               <Checkbox label='Waste' onClick={ () => this.handleCheckboxClick('Waste') } />
             </Form.Field>
-            <Button type='submit'>Search</Button>
+            <Button onClick={ this.handleCategorySearchSubmit }>Search</Button>
           </Form>
         }
 

@@ -19,7 +19,8 @@ const viewTerms = (app) => {
 
   // Get all term names to be used as options for dropdown input
   app.get('/api/term/allnames', (req, res) => {
-    Term.find({}, { 'Term': 1, '_id': 0 }, (err, terms) => {
+    Term.find({}, { 'Term': 1, '_id': 0 }, { sort: { Term: 1 } }, (err, terms) => {
+      console.log(terms);
       // create new array without any objects inside; it's just an array with the term names
       res.json(terms.map((term, i) => {
         return {
@@ -117,6 +118,22 @@ const viewTerms = (app) => {
         }
       });
     }
+  });
+
+  // search term by exact term name
+  app.get('/api/term/search/exact-term-name/:termname', (req, res) => {
+    const termName = req.params.termname;
+    const termNameRe = new RegExp('^' + termName + '$', 'i');
+    Term.findOne({ 'Term': termNameRe }, (err, term) => {
+      if (err) {
+        return handleError(err);
+      } else if (term) {
+        res.send(term);
+      } else {
+        // else respond with 'term not found'
+        res.send('Term not found');
+      }
+    });
   });
 
   // Search terms by keyword match
