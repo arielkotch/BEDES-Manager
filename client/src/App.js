@@ -20,7 +20,6 @@ class App extends Component {
     // check if user is logged in
     axios.get('/api/user/verify')
       .then(function(res) {
-        console.log("in componentdidmount verify call in app.js");
         self.setState({
           authenticated: res.data.authenticated,
           usertype: res.data.usertype
@@ -37,8 +36,6 @@ class App extends Component {
     // check if user is logged in
     axios.get('/api/user/verify')
       .then(function(res) {
-        console.log("in checkifuserloggin verify call in app.js");
-        console.log(res.data);
         self.setState({
           authenticated: res.data.authenticated,
           usertype: res.data.usertype

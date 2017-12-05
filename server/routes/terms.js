@@ -185,7 +185,6 @@ const viewTerms = (app) => {
         // else respond with 'term not found'
         res.send('Term not found');
       }
-
     });
   });
 

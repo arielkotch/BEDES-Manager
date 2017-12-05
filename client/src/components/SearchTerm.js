@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Container, Button, Form, Checkbox } from 'semantic-ui-react';
+import { Container, Button, Form, Checkbox, Dropdown } from 'semantic-ui-react';
 
-import Term from './SearchTerm/Term';
+import FoundTerms from './SearchTerm/FoundTerms';
 
 export default class SearchTerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      allTermNames: [],
       query: '',
       termData: {},
       termFound: false,
@@ -30,6 +31,21 @@ export default class SearchTerm extends Component {
         'Waste': false
       }
     };
+  }
+
+  componentDidMount() {
+    const self = this;
+    // get list of term names
+    axios.get('/api/term/allnames/')
+      .then(function(response) {
+        const data = response.data;
+        self.setState({
+          allTermNames: data,
+        })
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   // button to toggle keyword search
@@ -91,6 +107,14 @@ export default class SearchTerm extends Component {
     event.preventDefault();
   }
 
+  // handler for term input
+  handleTermDropDownChange = (e, data) => {
+    const query = data.value;
+    this.setState({
+      query: query
+    });
+  }
+
   // button for searching by category
   handleCategorySearchSubmit = event => {
     const categories = this.state.categories;
@@ -122,16 +146,7 @@ export default class SearchTerm extends Component {
 
   render() {
     const termData = this.state.termData;
-    // terms variable will hold jsx for rendering terms
-    let terms;
-    // check if multiple terms were found
-    if (termData.length > 1) {
-      terms = termData.map((data, index) => {
-        return <Term termData={data} key={index} />
-      });
-    } else {
-      terms = <Term termData={this.state.termData} />;
-    }
+    const allTermNames = this.state.allTermNames;
 
     return (
       <Container>
@@ -148,9 +163,13 @@ export default class SearchTerm extends Component {
             <Form onSubmit={ this.handleKeywordSearchSubmit }>
               <Form.Field>
                 <label>Search for Term</label>
-                <input placeholder='Search for term' onChange={ this.handleKeywordSearchChange } />
+                <Dropdown
+                  placeholder='Search Term'
+                  fluid search selection
+                  options={allTermNames}
+                  onChange={ this.handleTermDropDownChange }
+                />
               </Form.Field>
-              <Button type='submit'>Search</Button>
             </Form>
           :
           <Form onSubmit={ this.handleCategorySearchSubmit }>
@@ -176,7 +195,7 @@ export default class SearchTerm extends Component {
           </Form>
         }
 
-        { this.state.termFound ?  terms : null }
+        { this.state.termFound ?  <FoundTerms termData={ termData } /> : null }
       </Container>
     );
   }
