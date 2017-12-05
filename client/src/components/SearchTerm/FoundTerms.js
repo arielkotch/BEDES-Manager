@@ -1,60 +1,46 @@
-import React, { Component } from 'react';
-// import axios from 'axios';
-import { Segment, Button } from 'semantic-ui-react';
+import React from 'react'
+import { Accordion } from 'semantic-ui-react'
 
-import Option from './Option';
+const TransformsAccordian = (props) => {
+  const termData = props.termData;
+  let dataLen = termData.length;
+  console.log(termData);
+  console.log('termData length: ' + dataLen);
 
-export default class Term extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //   };
-  // }
+  const arrayPanels = termData.map((obj, i) => {
 
-  // delete term onClick handler
-  handleDeleteButtonClick = () => {
-    // axios.delete('/api/term/delete/' + this.state.term['Content-UUID'])
-    //   .then(function (response) {
-    //     this.setState({
-    //       term: false
-    //     });
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-  }
+    const objContents = [];
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        console.log(key);
+        if (key != 'Options') {
+          objContents.push(
+            <p key={ key + '_' + i }>{ key }: { obj[key] }</p>
+          );
+        }
+      }
+    }
 
-  render() {
-    const termData = this.props.termData;
-    console.log(termData);
-
-    // create list of Option components
-    // let optionList = termData.Options.map((optionData, index) => {
-    //   return (
-    //     <Option optionData={optionData} key={index}/>
-    //   );
-    // });
+    return { title: i + ': Object', content: { content: objContents }, key: 'panel_' + i };
+  });
 
 
 
-    return (
-      <div>asdf</div>
-    );
-  }
+
+
+  const arrayContent = (
+    <div>
+      <Accordion.Accordion panels={ arrayPanels } />
+    </div>
+  );
+
+  const rootPanel = [
+    { title: 'Terms: Array [' + dataLen + ']', content: { content: arrayContent }, key: 'root_panel' }
+  ];
+
+  return (
+    <Accordion panels={ rootPanel } styled />
+  );
 }
 
-
-//   {
-//     this.props.termDataNotFound
-//     ?
-//       <div className="red-text">Term not found</div>
-//     :
-//       null
-//   }
-//   {
-//     this.props.termDataDeleted
-//     ?
-//       <div className="red-text">Term deleted</div>
-//     :
-//       null
-//   }
+export default TransformsAccordian

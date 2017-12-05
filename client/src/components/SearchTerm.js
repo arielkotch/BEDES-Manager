@@ -81,10 +81,36 @@ export default class SearchTerm extends Component {
   }
 
   // Handler for search submit
-  handleKeywordSearchSubmit = event => {
-    // Save this in variable, self
+  // handleKeywordSearchSubmit = event => {
+  //   // Save this in variable, self
+  //   const self = this;
+  //   const { query } = this.state;
+  //   axios.get('/api/term/search/exact-term-name/' + query)
+  //     .then(function(response) {
+  //       const data = response.data;
+  //       // check if term was found
+  //       if (data) {
+  //         self.setState({
+  //           termData: data,
+  //           termFound: true
+  //         });
+  //       } else {
+  //         self.setState({
+  //           termFound: false
+  //         });
+  //       }
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  //   // Prevent form default behavior
+  //   event.preventDefault();
+  // }
+
+  // handler for term input
+  handleTermDropDownChange = (e, data) => {
+    const query = data.value;
     const self = this;
-    const { query } = this.state;
     axios.get('/api/term/search/exact-term-name/' + query)
       .then(function(response) {
         const data = response.data;
@@ -103,16 +129,6 @@ export default class SearchTerm extends Component {
       .catch(function(error) {
         console.log(error);
       });
-    // Prevent form default behavior
-    event.preventDefault();
-  }
-
-  // handler for term input
-  handleTermDropDownChange = (e, data) => {
-    const query = data.value;
-    this.setState({
-      query: query
-    });
   }
 
   // button for searching by category

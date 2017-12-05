@@ -1,9 +1,7 @@
 import React from 'react'
 import { Accordion } from 'semantic-ui-react'
 
-
-
-const AccordionExampleNested = (props) => {
+const TransformsAccordian = (props) => {
   console.log(props.newTransformsData);
 
   const newTransformsData = props.newTransformsData;
@@ -52,4 +50,4 @@ const AccordionExampleNested = (props) => {
   );
 }
 
-export default AccordionExampleNested
+export default TransformsAccordian

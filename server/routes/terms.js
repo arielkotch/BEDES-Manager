@@ -128,7 +128,9 @@ const viewTerms = (app) => {
       if (err) {
         return handleError(err);
       } else if (term) {
-        res.send(term);
+        let termArr = [];
+        termArr.push(term);
+        res.send(termArr);
       } else {
         // else respond with 'term not found'
         res.send('Term not found');
