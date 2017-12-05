@@ -72,46 +72,60 @@ class Navbar extends Component {
     if (authenticated) {
       // show a different nav bar if logged in
       const usertype = this.props.usertype;
-      // invert navbar colors if normal user
-      let inverted = true;
-      // don't invert navbar colors if admin
+
       if (usertype === 'admin') {
-        inverted = false;
-      }
-      return (
-        <Menu inverted={ inverted }>
-          <Container>
-            <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
-              Bedes Manager
-            </Menu.Item>
-            <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
-            <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
-            <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
-            <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
-            <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
-            <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
+        // if admin, dont' revert colors and show /manage button
+        return (
+          <Menu>
+            <Container>
+              <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
+                Bedes Manager
               </Menu.Item>
-            </Menu.Menu>
-          </Container>
-        </Menu>
-      );
+              <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
+              <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
+              <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
+              <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
+              <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
+              <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
+              <Menu.Menu position='right'>
+                <Menu.Item>
+                  <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
+                </Menu.Item>
+              </Menu.Menu>
+            </Container>
+          </Menu>
+        );
+      } else if (usertype === 'normal') {
+        return (
+          <Menu inverted>
+            <Container>
+              <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
+                Bedes Manager
+              </Menu.Item>
+              <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
+              <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
+              <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
+              <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
+              <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
+              <Menu.Menu position='right'>
+                <Menu.Item>
+                  <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
+                </Menu.Item>
+              </Menu.Menu>
+            </Container>
+          </Menu>
+        );
+      }
+
     }
 
+    // not authenticated
     return (
       <Menu inverted>
         <Container>
           <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
             Bedes Manager
           </Menu.Item>
-          <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
-          <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
-          <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
-          <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
-          <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
-          <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="export">New Transform</Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item className='item'>
               <Button as={ Link } to='/login' active={ this.state.loginActive } onClick={ this.handleNavbarButtonClick } id="login">Log in</Button>
