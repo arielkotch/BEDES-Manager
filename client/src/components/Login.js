@@ -57,7 +57,7 @@ export default class Login extends Component {
         console.log(res.data);
         self.setState({
           authenticated: res.data.authenticated
-        })
+        });
 
       })
       .catch(function(error) {

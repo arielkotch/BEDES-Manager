@@ -36,9 +36,12 @@ class App extends Component {
     // check if user is logged in
     axios.get('/api/user/verify')
       .then(function(res) {
+        const authenticated = res.data.authenticated;
+        const usertype = res.data.usertype;
+
         self.setState({
-          authenticated: res.data.authenticated,
-          usertype: res.data.usertype
+          authenticated: authenticated,
+          usertype: usertype
         })
 
       })
@@ -50,8 +53,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar checkIfUserLoggedIn={ this.checkIfUserLoggedIn }  authenticated={ this.state.authenticated } usertype={ this.state.usertype } />
-        <Main checkIfUserLoggedIn={ this.checkIfUserLoggedIn } />
+        <Navbar checkIfUserLoggedIn={ this.checkIfUserLoggedIn } authenticated={ this.state.authenticated } usertype={ this.state.usertype } />
+        <Main checkIfUserLoggedIn={ this.checkIfUserLoggedIn } authenticated={ this.state.authenticated } />
       </div>
     );
   }

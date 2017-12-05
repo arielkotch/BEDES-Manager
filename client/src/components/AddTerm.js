@@ -19,6 +19,22 @@ export default class AddTerm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const self = this;
+
+    // redirect if not authenticated
+    axios.get('/api/user/verify')
+      .then(function(res) {
+        const authenticated = res.data.authenticated;
+        if (!authenticated) {
+          self.props.history.push('/')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   handleChange(e) {
       this.setState({
           [e.target.name]: e.target.value

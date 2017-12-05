@@ -10,7 +10,26 @@ export default class ListTerm extends Component {
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
+    const self = this;
+
+    // redirect if not authenticated
+    axios.get('/api/user/verify')
+      .then(function(res) {
+        const authenticated = res.data.authenticated;
+        const usertype = res.data.usertype;
+        if (!authenticated) {
+          self.props.history.push('/');
+        }
+        // if not admin, redirect to /
+        if (usertype !== 'admin') {
+          self.props.history.push('/');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     axios.get('/api/term/proposed/all')
     .then(response => {
       this.setState({

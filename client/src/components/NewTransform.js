@@ -40,6 +40,19 @@ export default class NewTransform extends Component {
 
   componentDidMount() {
     const self = this;
+
+    // redirect if not authenticated
+    axios.get('/api/user/verify')
+      .then(function(res) {
+        const authenticated = res.data.authenticated;
+        if (!authenticated) {
+          self.props.history.push('/')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     // get list of term names
     axios.get('/api/term/allnames/')
       .then(function(response) {

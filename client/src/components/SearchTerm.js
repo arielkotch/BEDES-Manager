@@ -35,6 +35,19 @@ export default class SearchTerm extends Component {
 
   componentDidMount() {
     const self = this;
+
+    // redirect if not authenticated
+    axios.get('/api/user/verify')
+      .then(function(res) {
+        const authenticated = res.data.authenticated;
+        if (!authenticated) {
+          self.props.history.push('/')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     // get list of term names
     axios.get('/api/term/allnames/')
       .then(function(response) {
@@ -161,6 +174,13 @@ export default class SearchTerm extends Component {
   }
 
   render() {
+    // const authenticated = this.props.authenticated;
+    // console.log(authenticated);
+    // if not authenticated, redirect to /
+    // if (!authenticated) {
+    //   return <Redirect to='/'  />
+    // }
+
     const termData = this.state.termData;
     const allTermNames = this.state.allTermNames;
 

@@ -13,22 +13,40 @@ import ListTerm from './ListTerm';
 
 export default class Main extends Component {
   render() {
-    let checkIfUserLoggedIn = this.props.checkIfUserLoggedIn
+    const checkIfUserLoggedIn = this.props.checkIfUserLoggedIn;
+    const authenticated = this.props.authenticated;
+
     return (
       <main>
         <Switch>
           <Route exact path='/' render={(props) => {
             return <Home {...props} checkIfUserLoggedIn={ checkIfUserLoggedIn } />
-          }}
-          />
-          <Route exact path='/propose' component={AddTerm}/>
-          <Route exact path='/search' component={SearchTerm}/>
-          <Route exact path='/update' component={UpdateTerm}/>
-          <Route exact path='/export' component={ExportToXml}/>
-          <Route exact path='/transform' component={NewTransform}/>
-          <Route exact path='/manage' component={ListTerm}/>
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
+          }} />
+          <Route exact path='/propose' render={(props) => {
+            return <AddTerm {...props} authenticated={ authenticated } />
+          }} />
+          <Route exact path='/search' render={(props) => {
+            return <SearchTerm {...props} authenticated={ authenticated } />
+          }} />
+
+          <Route exact path='/update' render={(props) => {
+            return <UpdateTerm {...props} authenticated={ authenticated } />
+          }} />
+          <Route exact path='/export' render={(props) => {
+            return <ExportToXml {...props} authenticated={ authenticated } />
+          }} />
+          <Route exact path='/transform' render={(props) => {
+            return <NewTransform {...props} authenticated={ authenticated } />
+          }} />
+          <Route exact path='/manage' render={(props) => {
+            return <ListTerm {...props} authenticated={ authenticated } />
+          }} />
+          <Route exact path='/login' render={(props) => {
+            return <Login {...props} authenticated={ authenticated } />
+          }} />
+          <Route exact path='/signup' render={(props) => {
+            return <Signup {...props} authenticated={ authenticated } />
+          }} />
         </Switch>
       </main>
     );
