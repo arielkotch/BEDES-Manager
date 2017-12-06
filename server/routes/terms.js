@@ -3,7 +3,7 @@ const js2xmlparser = require("js2xmlparser");
 // Load up the term model
 const Term = require('../models/term');
 
-const viewTerms = (app) => {
+const terms = (app) => {
   // Check if server is running
   app.get('/api', (req, res) => {
     res.set('Content-Type', 'application/json');
@@ -210,4 +210,4 @@ const viewTerms = (app) => {
   return app;
 }
 
-module.exports = viewTerms
+module.exports = terms
