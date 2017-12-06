@@ -19,24 +19,33 @@ export default class ExportToXml extends Component {
       });
   }
 
-  exportTermButtonClick = () => {
-    axios.get('/api/term/export')
-      .then(function (response) {
-        // console.log(response);
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // exportTermButtonClick = () => {
+  //   axios.get('/api/term/export')
+  //     .then(function (response) {
+  //       // console.log(response);
+  //
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   render() {
     return (
       <Container>
-        <Button onClick={this.exportTermButtonClick}>
-          Export to XML
-        </Button>
+        <form
+          action="http://127.0.0.1:5000/api/term/export"
+          method="get"
+        >
+          <input type="submit" value="Export XML file" />
+        </form>
+
+
       </Container>
     );
   }
 }
+//
+// <Button onClick={this.exportTermButtonClick}>
+//   Export to XML
+// </Button>
