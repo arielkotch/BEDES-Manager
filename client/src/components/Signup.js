@@ -124,7 +124,7 @@ export default class AddTerm extends Component {
                   name='passwordRepeat'
                 />
                 <Form.Field>
-                  User Level:
+                  User Type:
                 </Form.Field>
                 <Form.Field>
                   <Checkbox

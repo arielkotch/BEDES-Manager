@@ -75,7 +75,7 @@ export default class AddTerm extends Component {
             <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={this.handleChange}/>
             <input type="text" placeholder="Sector" name="sector" value={this.state.sector} onChange={this.handleChange}/>
             <input type="text" placeholder="Unit-of-Measure" name="measure" value={this.state.measure} onChange={this.handleChange}/>
-            <Button type="submit" value="Submit">Submit</Button>
+            <Button type="submit" value="Submit" disabled>Submit</Button>
           </Form.Field>
         </Form>
       </Container>
