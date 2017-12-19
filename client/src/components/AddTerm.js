@@ -8,7 +8,6 @@ export default class AddTerm extends Component {
     this.state = {
       url: '',
       term: '',
-      date: '',
       category: '',
       definition: '',
       application: '',
@@ -46,7 +45,6 @@ export default class AddTerm extends Component {
       axios.post('/api/term/proposed/add', {
         url: this.state.url,
         term: this.state.term,
-        date: this.state.date,
         category: this.state.category,
         definition: this.state.definition,
         application: this.state.application,
@@ -69,13 +67,12 @@ export default class AddTerm extends Component {
             <label>Propose a Term</label>
             <input type="text" placeholder="URL" name="url" value={this.state.url} onChange={this.handleChange}/>
             <input type="text" placeholder="Term" name="term" value={this.state.term} onChange={this.handleChange}/>
-            <input type="date" placeholder="Updated-date" name="date" value={this.state.date} onChange={ this.handleChange}/>
             <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
             <input type="text" placeholder="Term-Definition" name="definition" value={this.state.definition} onChange={this.handleChange}/>
             <input type="text" placeholder="Application" name="application" value={this.state.application} onChange={this.handleChange}/>
             <input type="text" placeholder="Sector" name="sector" value={this.state.sector} onChange={this.handleChange}/>
             <input type="text" placeholder="Unit-of-Measure" name="measure" value={this.state.measure} onChange={this.handleChange}/>
-            <Button type="submit" value="Submit" disabled>Submit</Button>
+            <Button type="submit" value="Submit">Submit</Button>
           </Form.Field>
         </Form>
       </Container>

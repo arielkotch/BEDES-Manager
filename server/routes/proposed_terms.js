@@ -14,7 +14,6 @@ app.post('/api/term/proposed/add', (req, res) => {
   console.log(req.body);
     const url = req.body.url;
     const term = req.body.term;
-    const date = req.body.date;
     const category = req.body.category;
     const definition = req.body.definition;
     const application = req.body.application;
@@ -24,12 +23,11 @@ app.post('/api/term/proposed/add', (req, res) => {
     const proposed_terms = new Proposed_Term({
         'URL': url,
         'Term': term,
-        'Updated-date': date,
         'Category': category,
         'Term-Definition': definition,
         'Application': application,
         'Sector': sector,
-        'Unit-of-Measure': measure
+        'Unit-of-Measure': measure,
     });
       proposed_terms.save()
       .then(p_terms => {
@@ -40,7 +38,19 @@ app.post('/api/term/proposed/add', (req, res) => {
         console.log('Failed to save to db.')
       });
   });
+  // delete proposed terms
+  app.get('/api/term/proposed/delete/:id', (req,res) => {
+    const id = req.params.id;
 
+    Proposed_Term.findByIdAndRemove({_id: req.params.id},
+      function(err, proposed_terms){
+        if(err)
+          console.log(err);
+        else
+          console.log('Term: ' + id + ' Successfully removed.')
+      }
+    )
+  })
   return app;
 }
 
