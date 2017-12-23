@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import axios from 'axios';
-import { Button, Container, Menu } from 'semantic-ui-react';
+import { Button, Container, Menu, Sidebar, Segment } from 'semantic-ui-react';
 
 class Navbar extends Component {
   constructor(props) {
@@ -76,44 +76,40 @@ class Navbar extends Component {
       if (usertype === 'admin') {
         // if admin, dont' revert colors and show /manage button
         return (
-          <Menu>
-            <Container>
-              <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
-                Bedes Manager
+          <Sidebar as={Menu} animation='overlay' width='thin' visible={true} icon='labeled' vertical inverted>
+            <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
+              Bedes Manager
+            </Menu.Item>
+            <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
+            <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
+            <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
+            <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
+            <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
+            <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
+            <Menu.Menu position='right'>
+              <Menu.Item>
+                <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
               </Menu.Item>
-              <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
-              <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
-              <Menu.Item as={ Link } to='/manage' active={ this.state.manageActive } onClick={ this.handleNavbarButtonClick } id="list">List</Menu.Item>
-              <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
-              <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
-              <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
-              <Menu.Menu position='right'>
-                <Menu.Item>
-                  <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
-                </Menu.Item>
-              </Menu.Menu>
-            </Container>
-          </Menu>
+            </Menu.Menu>
+          </Sidebar>
         );
       } else if (usertype === 'normal') {
         return (
-          <Menu inverted>
-            <Container>
-              <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
-                Bedes Manager
+          <Sidebar as={Menu} animation='overlay' width='thin' visible={true} icon='labeled' vertical inverted>
+            <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
+              Bedes Manager
+            </Menu.Item>
+            <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
+            <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
+            <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
+            <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
+            <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
+            <Menu.Menu position='right'>
+              <Menu.Item>
+                <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
               </Menu.Item>
-              <Menu.Item as={ Link } to='/search' active={ this.state.searchActive } onClick={ this.handleNavbarButtonClick } id="search">Search</Menu.Item>
-              <Menu.Item as={ Link } to='/propose' active={ this.state.proposeActive } onClick={ this.handleNavbarButtonClick } id="propose">Propose</Menu.Item>
-              <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
-              <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
-              <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
-              <Menu.Menu position='right'>
-                <Menu.Item>
-                  <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
-                </Menu.Item>
-              </Menu.Menu>
-            </Container>
-          </Menu>
+            </Menu.Menu>
+          </Sidebar>
         );
       }
 
@@ -121,21 +117,19 @@ class Navbar extends Component {
 
     // not authenticated
     return (
-      <Menu inverted>
-        <Container>
-          <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
-            Bedes Manager
+      <Sidebar as={Menu} animation='overlay' width='thin' visible={true} icon='labeled' vertical inverted>
+        <Menu.Item as={ Link } to='/' header onClick={ this.handleNavbarButtonClick } name="asdf">
+          Bedes Manager
+        </Menu.Item>
+        <Menu.Menu position='right'>
+          <Menu.Item className='item'>
+            <Button as={ Link } to='/login' active={ this.state.loginActive } onClick={ this.handleNavbarButtonClick } id="login">Log in</Button>
           </Menu.Item>
-          <Menu.Menu position='right'>
-            <Menu.Item className='item'>
-              <Button as={ Link } to='/login' active={ this.state.loginActive } onClick={ this.handleNavbarButtonClick } id="login">Log in</Button>
-            </Menu.Item>
-            <Menu.Item>
-              <Button as={ Link } to='/signup' active={ this.state.signupActive } onClick={ this.handleNavbarButtonClick } id="signup" primary>Sign Up</Button>
-            </Menu.Item>
-          </Menu.Menu>
-        </Container>
-      </Menu>
+          <Menu.Item>
+            <Button as={ Link } to='/signup' active={ this.state.signupActive } onClick={ this.handleNavbarButtonClick } id="signup" primary>Sign Up</Button>
+          </Menu.Item>
+        </Menu.Menu>
+      </Sidebar>
     );
   }
 }
