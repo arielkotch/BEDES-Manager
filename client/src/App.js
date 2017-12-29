@@ -44,7 +44,8 @@ class App extends Component {
 
         self.setState({
           authenticated: authenticated,
-          usertype: usertype
+          usertype: usertype,
+          email: res.data.email
         })
 
       })

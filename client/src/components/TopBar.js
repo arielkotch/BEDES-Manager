@@ -2,19 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import axios from 'axios';
-import { Button, Container, Menu } from 'semantic-ui-react';
+import { Button, Container, Grid, Menu, Dropdown } from 'semantic-ui-react';
 
 class TopBar extends Component {
 
   handleLogoutButtonClick = event => {
-    let activeStates = this.state.activeStates;
-    // reset all active states to false
-    for (let prop in activeStates) {
-      activeStates[prop] = false;
-    }
-    // set currently clicked button to true
-    activeStates[event.target.id + 'Active'] = true;
-    this.setState(activeStates);
 
     const self = this;
     // check if user is logged in
@@ -28,11 +20,11 @@ class TopBar extends Component {
         console.log(error);
       });
 
-
   };
 
   render() {
     const authenticated = this.props.authenticated;
+    const email = this.props.email;
     if (authenticated) {
       // show a different nav bar if logged in
       const usertype = this.props.usertype;
@@ -44,13 +36,15 @@ class TopBar extends Component {
       }
       return (
         <Menu inverted={ inverted }>
-          <Container>
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                <Button onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
-              </Menu.Item>
-            </Menu.Menu>
-          </Container>
+
+          <Dropdown text={ email } style={{ color: 'white', marginLeft: 'auto', marginRight: 'auto' }}>
+            <Dropdown.Menu>
+              <Button onClick={ this.handleLogoutButtonClick } id="logout" primary
+                style={{ color: 'white', marginLeft: 'auto', marginRight: 'auto' }}
+              >Logout</Button>
+            </Dropdown.Menu>
+          </Dropdown>
+
         </Menu>
       );
     }

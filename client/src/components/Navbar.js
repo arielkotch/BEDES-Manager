@@ -86,11 +86,6 @@ class Navbar extends Component {
             <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
             <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
-              </Menu.Item>
-            </Menu.Menu>
           </Sidebar>
         );
       } else if (usertype === 'normal') {
@@ -104,11 +99,6 @@ class Navbar extends Component {
             <Menu.Item as={ Link } to='/update' active={ this.state.updateActive } onClick={ this.handleNavbarButtonClick } id="update">Update</Menu.Item>
             <Menu.Item as={ Link } to='/export' active={ this.state.exportActive } onClick={ this.handleNavbarButtonClick } id="export">Export</Menu.Item>
             <Menu.Item as={ Link } to='/transform' active={ this.state.transformActive } onClick={ this.handleNavbarButtonClick } id="transform">New Transform</Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                <Button active={ this.state.logoutActive } onClick={ this.handleLogoutButtonClick } id="logout" primary>Logout</Button>
-              </Menu.Item>
-            </Menu.Menu>
           </Sidebar>
         );
       }
