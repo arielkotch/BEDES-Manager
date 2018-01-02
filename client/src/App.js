@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import './App.css';
 
+import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 
@@ -11,7 +12,8 @@ class App extends Component {
     // initial active values of menu buttons
     this.state = {
       authenticated: false,
-      usertype: ''
+      usertype: '',
+      email: ''
     };
   }
 
@@ -22,7 +24,8 @@ class App extends Component {
       .then(function(res) {
         self.setState({
           authenticated: res.data.authenticated,
-          usertype: res.data.usertype
+          usertype: res.data.usertype,
+          email: res.data.email
         })
 
       })
@@ -41,7 +44,8 @@ class App extends Component {
 
         self.setState({
           authenticated: authenticated,
-          usertype: usertype
+          usertype: usertype,
+          email: res.data.email
         })
 
       })
@@ -53,6 +57,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <TopBar checkIfUserLoggedIn={ this.checkIfUserLoggedIn } authenticated={ this.state.authenticated } usertype={ this.state.usertype } email={ this.state.email }/>
         <Navbar checkIfUserLoggedIn={ this.checkIfUserLoggedIn } authenticated={ this.state.authenticated } usertype={ this.state.usertype } />
         <Main checkIfUserLoggedIn={ this.checkIfUserLoggedIn } authenticated={ this.state.authenticated } />
       </div>

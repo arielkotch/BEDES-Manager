@@ -5,7 +5,8 @@ const auth = (app, passport) => {
   	if(req.isAuthenticated()) {
   		return res.status(200).json({
   			usertype: req.user.local.usertype,
-  			authenticated: true
+  			authenticated: true,
+        email: req.user.local.email
   		});
   	} else {
   		return res.status(200).json({
