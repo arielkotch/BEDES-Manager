@@ -22,7 +22,7 @@ Run Mongodb in the Background
 ```bash
 mongod
 ```
-Concurrently Run server and Client
+Concurrently Run Server and Client
 ```bash
 npm start
 ```
