@@ -14,11 +14,19 @@ You'll need to install:
  * MongoDB
 
 ### Installing
-
 ```bash
 npm run devbuild
+```
+### Installing
+Run Mongodb in the Background
+```bash
+mongod 
+```
+Concurrently Run server and Client 
+```bash
 npm start
 ```
+### Initial Import
 Go to http://127.0.0.1:5000/api/initial-import to do initial xml import into DB.
 
 ## Usage with Docker
