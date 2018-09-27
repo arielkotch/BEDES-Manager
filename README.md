@@ -17,17 +17,19 @@ You'll need to install:
 ```bash
 npm run devbuild
 ```
-### Installing
+### Running
 Run Mongodb in the Background
 ```bash
-mongod 
+mongod
 ```
-Concurrently Run server and Client 
+Concurrently Run server and Client
 ```bash
 npm start
 ```
 ### Initial Import
 Go to http://127.0.0.1:5000/api/initial-import to do initial xml import into DB.
+### Client
+Go to http://127.0.0.1:3000
 
 ## Usage with Docker
 Docker is used to create containers, or a packaged application with all its parts, which helps eliminate the issues teams face with different development environments.
